@@ -12,8 +12,8 @@ $balanced:                        #33cd5f !default;
 $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
-$dark:                            #444 !default;
 */
+$dark:                            #212121 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -21,3 +21,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.tab-item .icon {
+    font-size: 1.6rem;
+}
+
+.bar .button.button-icon {
+    &:before {
+        font-size: 1.5rem;
+    }
+}
+
+.pane,
+.view {
+    background: url('../img/logo.png') no-repeat center center $dark;
+}
