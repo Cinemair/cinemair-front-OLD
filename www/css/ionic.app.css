@@ -7713,9 +7713,8 @@ a.button {
 .login-form {
   flex: 1; }
 
-/*
-.pane,
-.view {
-    background: url('../img/logo.png') no-repeat center center $dark;
-}
-*/
+.pane, .view {
+  background: url('../img/logo.png') no-repeat center center #212121; }
+
+.item-icon-right .icon {
+  font-size: 20px; }

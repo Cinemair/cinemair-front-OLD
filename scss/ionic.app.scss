@@ -48,9 +48,12 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .login-form {
     flex: 1;
 }
-/*
+
 .pane,
 .view {
     background: url('../img/logo.png') no-repeat center center $dark;
 }
-*/
+
+.item-icon-right .icon {
+    font-size: 20px;
+}

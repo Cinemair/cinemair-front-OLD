@@ -12,17 +12,21 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-striped tabs-top tabs-background-assertive tabs-color-light">
-
     <!-- Schedule Tab -->
-    <ion-tab title="Scheduled" icon-on="ion-android-favorite" icon-off="ion-android-favorite" href="#/tab/schedule"></ion-tab>
-
+    <ion-tab title="Schedule" icon-on="ion-android-favorite" icon-off="ion-android-favorite" href="#/tab/schedule">
+        <ion-nav-view name="tab-schedule"></ion-nav-view>
+    </ion-tab>
     <!-- Movies Tab -->
-    <ion-tab title="Movies" icon-on="ion-videocamera" icon-off="ion-videocamera" href="#/tab/movies"></ion-tab>
-
+    <ion-tab title="Movies" icon-on="ion-videocamera" icon-off="ion-videocamera" href="#/tab/movies">
+        <ion-nav-view name="tab-movies"></ion-nav-view>
+    </ion-tab>
     <!-- Cinemas Tab -->
-    <ion-tab title="Cinemas" icon-on="ion-location" icon-off="ion-location" href="#/tab/cinema"></ion-tab>
-
+    <ion-tab title="Cinemas" icon-on="ion-location" icon-off="ion-location" href="#/tab/cinemas">
+        <ion-nav-view name="tab-cinemas"></ion-nav-view>
+    </ion-tab>
     <!-- Cinemas Tab -->
-    <ion-tab title="Dates" icon-on="ion-android-calendar" icon-off="ion-android-calendar" href="#/tab/dates"></ion-tab>
+    <ion-tab title="Dates" icon-on="ion-android-calendar" icon-off="ion-android-calendar" href="#/tab/dates">
+        <ion-nav-view name="tab-dates"></ion-nav-view>
+    </ion-tab>
 
 </ion-tabs>
