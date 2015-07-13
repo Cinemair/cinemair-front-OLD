@@ -7698,5 +7698,24 @@ a.button {
 .bar .button.button-icon:before {
   font-size: 1.5rem; }
 
-.pane, .view {
-  background: url('../img/logo.png') no-repeat center center #212121; }
+.login-view {
+  background: url('https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137') no-repeat center right #212121;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 100vh; }
+  .login-view h1 {
+    color: #f8f8f8;
+    text-align: center;
+    margin-top: 30vh; }
+
+.login-form {
+  flex: 1; }
+
+/*
+.pane,
+.view {
+    background: url('../img/logo.png') no-repeat center center $dark;
+}
+*/

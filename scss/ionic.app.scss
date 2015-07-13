@@ -31,7 +31,26 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     }
 }
 
+.login-view {
+    background: url('https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137') no-repeat center right $dark;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    height: 100vh;
+    h1 {
+        color: $stable;
+        text-align: center;
+        margin-top: 30vh;
+    }
+}
+
+.login-form {
+    flex: 1;
+}
+/*
 .pane,
 .view {
     background: url('../img/logo.png') no-repeat center center $dark;
 }
+*/
