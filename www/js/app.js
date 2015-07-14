@@ -34,7 +34,7 @@ angular.module('cinemair', [
     $stateProvider
 
     // setup an abstract state for the tabs directive
-    .state('login', {
+        .state('login', {
         url: '/',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
@@ -50,41 +50,41 @@ angular.module('cinemair', [
     // Each tab has its own nav history stack:
 
     .state('tab.schedule', {
-        url: '/schedule',
-        views: {
-            'tab-schedule': {
-                templateUrl: 'templates/tab-schedule.html',
-                controller: 'ScheduleCtrl'
+            url: '/schedule',
+            views: {
+                'tab-schedule': {
+                    templateUrl: 'templates/tab-schedule.html',
+                    controller: 'ScheduleCtrl'
+                }
             }
-        }
-    })
-    .state('tab.movies', {
-        url: '/movies',
-        views: {
-            'tab-movies': {
-                templateUrl: 'templates/tab-movies.html',
-                controller: 'MoviesCtrl'
+        })
+        .state('tab.movies', {
+            url: '/movies',
+            views: {
+                'tab-movies': {
+                    templateUrl: 'templates/tab-movies.html',
+                    controller: 'MoviesCtrl'
+                }
             }
-        }
-    })
-    .state('tab.cinemas', {
-        url: '/cinemas',
-        views: {
-            'tab-cinemas': {
-                templateUrl: 'templates/tab-cinemas.html',
-                controller: 'CinemasCtrl'
+        })
+        .state('tab.cinemas', {
+            url: '/cinemas',
+            views: {
+                'tab-cinemas': {
+                    templateUrl: 'templates/tab-cinemas.html',
+                    controller: 'CinemasCtrl'
+                }
             }
-        }
-    })
-    .state('tab.dates', {
-        url: '/dates',
-        views: {
-            'tab-dates': {
-                templateUrl: 'templates/tab-dates.html',
-                controller: 'DatesCtrl'
+        })
+        .state('tab.dates', {
+            url: '/dates',
+            views: {
+                'tab-dates': {
+                    templateUrl: 'templates/tab-dates.html',
+                    controller: 'DatesCtrl'
+                }
             }
-        }
-    })
+        })
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/');

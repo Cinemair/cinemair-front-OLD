@@ -16,7 +16,7 @@ angular.module('cinemair.services', [])
         }).success(function(data) {
             cinemas = data;
         });
-    }
+    };
     getShows = function() {
         return $http({
             method: 'GET',

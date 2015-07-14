@@ -1,7 +1,7 @@
 <ion-view view-title="Cinemas">
     <ion-content>
         <div class="list">
-            <a ng-repeat="cinema in cinemas" class="item item-icon-right" href="#">
+            <a nav-direction="swap" ng-repeat="cinema in cinemas" class="item item-icon-right" href="http://maps.google.com/?q={{cinema.address}}">
                 <h2>{{cinema.name}}</h2>
                 <p>{{cinema.address}}</p>
                 <i class="icon ion-chevron-right stable"></i>
