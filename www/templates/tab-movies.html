@@ -1,40 +1,9 @@
 <ion-view view-title="Movies">
     <ion-content>
         <div class="list ">
-            <a class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/eduardo_olv/128.jpg">
-                <h2>The Godfather</h2>
-                <p>Cine La Conchinchina</p>
-                <i class="icon ion-android-favorite icon-movies-fav assertive"></i>
-            </a>
-            <a class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jadlimcaco/128.jpg">
-                <h2>Un perro andaluz</h2>
-                <p>Cines de verano metemano</p>
-                <i class="icon ion-android-favorite icon-movies-fav stable"></i>
-            </a>
-            <a class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/frankchartrand/128.jpg">
-                <h2>The Godfather</h2>
-                <p>Cine La Conchinchina</p>
-                <i class="icon ion-android-favorite icon-movies-fav assertive"></i>
-            </a>
-            <a class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/emaxglobal/128.jpg">
-                <h2>Un perro andaluz</h2>
-                <p>Cines de verano metemano</p>
-                <i class="icon ion-android-favorite icon-movies-fav stable"></i>
-            </a>
-            <a class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/frankchartrand/128.jpg">
-                <h2>The Godfather</h2>
-                <p>Cine La Conchinchina</p>
-                <i class="icon ion-android-favorite icon-movies-fav stable"></i>
-            </a>
-            <a class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/emaxglobal/128.jpg">
-                <h2>Un perro andaluz</h2>
-                <p>Cines de verano metemano</p>
+            <a ng-repeat="movie in movies" class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
+                <img src="https://image.tmdb.org/t/p/w185/v9zzAbS5r6x0COu6giHmQXKIItA.jpg">
+                <h2>{{movie.name}}</h2>
                 <i class="icon ion-android-favorite icon-movies-fav assertive"></i>
             </a>
         </div>
