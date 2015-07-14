@@ -7699,7 +7699,7 @@ a.button {
   font-size: 1.5rem; }
 
 .login-view {
-  background: url('https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137') no-repeat center right #212121;
+  background: url("https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137") no-repeat center right #212121;
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -7714,7 +7714,7 @@ a.button {
   flex: 1; }
 
 .pane, .view {
-  background: url('../img/logo.png') no-repeat center center #212121; }
+  background: url("../img/logo.png") no-repeat center center #212121; }
 
 .item-icon-right .icon {
-  font-size: 20px; }
+  font-size: 24px; }

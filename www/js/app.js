@@ -54,12 +54,30 @@ angular.module('cinemair', ['ionic', 'cinemair.controllers', 'cinemair.services'
             }
         }
     })
+    .state('tab.movies', {
+        url: '/movies',
+        views: {
+            'tab-movies': {
+                templateUrl: 'templates/tab-movies.html',
+                controller: 'MoviesCtrl'
+            }
+        }
+    })
     .state('tab.cinemas', {
         url: '/cinemas',
         views: {
             'tab-cinemas': {
                 templateUrl: 'templates/tab-cinemas.html',
                 controller: 'CinemasCtrl'
+            }
+        }
+    })
+    .state('tab.dates', {
+        url: '/dates',
+        views: {
+            'tab-dates': {
+                templateUrl: 'templates/tab-dates.html',
+                controller: 'DatesCtrl'
             }
         }
     })

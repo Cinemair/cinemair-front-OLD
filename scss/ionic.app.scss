@@ -13,26 +13,23 @@ $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 */
-$dark:                            #212121 !default;
+$dark: #212121 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
 .tab-item .icon {
     font-size: 1.6rem;
 }
-
 .bar .button.button-icon {
     &:before {
         font-size: 1.5rem;
     }
 }
-
 .login-view {
-    background: url('https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137') no-repeat center right $dark;
+    background: url("https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137") no-repeat center right $dark;
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -44,16 +41,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         margin-top: 30vh;
     }
 }
-
 .login-form {
     flex: 1;
 }
-
 .pane,
 .view {
-    background: url('../img/logo.png') no-repeat center center $dark;
+    background: url("../img/logo.png") no-repeat center center $dark;
 }
-
-.item-icon-right .icon {
-    font-size: 20px;
+.item-icon-right {
+    .icon {
+        font-size: 24px;
+    }
 }
