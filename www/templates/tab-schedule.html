@@ -6,10 +6,10 @@
                     {{key}}
                 </div>
                 <a ng-repeat="event in val" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="#">
-                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/marcreisen/128.jpg">
+                    <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.poster_path}}">
                     <h2>{{ event.show_info.movie_info.name }}</h2>
-                    <p>{{ event.show_info.cinema_info.name }}</p>
-                    <p>{{ event.show_info.cinema_info.address }}</p>
+                    <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>
+                    <p>{{ eventHour }}</p>
                     <i class="icon ion-android-favorite assertive"></i>
                 </a>
             </div>

@@ -6,7 +6,7 @@
                     {{key}}
                 </div>
                 <a ng-repeat="show in val" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="#">
-                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/marcreisen/128.jpg">
+                    <img src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.poster_path}}">
                     <h2>{{ show.movie_info.name }}</h2>
                     <p>{{ show.cinema_info.name }}</p>
                     <p>{{ show.cinema_info.address }}</p>

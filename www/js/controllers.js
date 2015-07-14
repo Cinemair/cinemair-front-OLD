@@ -47,8 +47,11 @@ angular.module('cinemair.controllers', [])
     .then(function() {
         $ionicLoading.hide();
         var groupedEvents = _.groupBy(events, function(event) {
-            return moment(event.datetime).format('Do MMM YYYY');
+            return moment(event.datetime).format('LL');
         });
+        var eventHour = moment(events.datetime).format('HH:mm');
+
+        $scope.eventHour = eventHour;
         console.log(groupedEvents);
         $scope.events = groupedEvents;
     });
