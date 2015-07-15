@@ -40,15 +40,38 @@ angular.module('cinemair.controllers', [])
     });
     var movieId = $stateParams.id;
     CinemairSrv.getSingleMovie(movieId)
-    .then(function() {
-        $ionicLoading.hide();
-        $ionicBackdrop.release();
-        console.log(movie);
-        $scope.release = moment(movie.tmdb_info.release_date).format('LL');
-        $scope.countries = movie.tmdb_info.production_countries;
-        $scope.genres = movie.tmdb_info.genres;
-        $scope.movie = movie;
-    });
+        .then(function() {
+
+            <!-- load -->
+            $ionicLoading.hide();
+            $ionicBackdrop.release();
+
+            <!-- release -->
+            $scope.release = moment(movie.tmdb_info.release_date).format('LL');
+
+            <!-- vote average -->
+            var votesAvg = Math.round(movie.tmdb_info.vote_average);
+            var votesArray = [];
+            for (i = 0; i < votesAvg; i++) {
+                votesArray.push(i);
+            }
+
+            var votesRestArray = [];
+            for (i = 0; i < (10 - votesArray.length); i++) {
+                votesRestArray.push(i);
+            }
+            $scope.votes = votesArray;
+            $scope.votesrest = votesRestArray;
+
+            <!-- countries -->
+            $scope.countries = movie.tmdb_info.production_countries;
+
+            <!-- genres -->
+            $scope.genres = movie.tmdb_info.genres;
+
+            <!-- movie data -->
+            $scope.movie = movie;
+        });
 })
 
 .controller('CinemasCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv) {

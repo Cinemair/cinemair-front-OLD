@@ -11,6 +11,12 @@
                 <img src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.backdrop_path}}">
             </div>
             <div class="item item-body">
+                <span ng-repeat="vote in votes"class="vote-avg">
+                    <i class="icon ion-android-star energized"></i>
+                </span>
+                <span ng-repeat="vote in votesrest">
+                    <i class="icon ion-android-star-outline energized"></i>
+                </span>
                 <p>
                     {{movie.tmdb_info.overview}}
                 </p>

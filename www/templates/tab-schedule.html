@@ -5,7 +5,7 @@
                 <div class="item item-divider">
                     {{key}}
                 </div>
-                <a ng-repeat="event in val" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="#">
+                <a ng-repeat="event in val" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="#/tab/movies/{{event.id}}">
                     <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.poster_path}}">
                     <h2>{{ event.show_info.movie_info.name }}</h2>
                     <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>

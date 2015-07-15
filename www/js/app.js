@@ -68,6 +68,7 @@ angular.module('cinemair', [
         })
         .state('tab.movies', {
             url: '/movies',
+            cache: false,
             views: {
                 'tab-movies': {
                     templateUrl: 'templates/tab-movies.html',
@@ -77,6 +78,7 @@ angular.module('cinemair', [
         })
         .state('tab.movie', {
             url: '/movies/:id',
+            cache: false,
             views: {
                 'tab-movies': {
                     templateUrl: 'templates/movie-detail.html',
