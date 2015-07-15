@@ -49,12 +49,21 @@ angular.module('cinemair.services', [])
             events = data;
         });
     };
+    getSingleEvent = function(id) {
+        return $http({
+            method: 'GET',
+            url: serverURL + '/events/' + id
+        }).success(function(data) {
+            event = data;
+        });
+    };
     return {
         getMovies: getMovies,
         getSingleMovie: getSingleMovie,
         getCinemas: getCinemas,
         getShows: getShows,
         getMovieShows: getMovieShows,
-        getEvents: getEvents
+        getEvents: getEvents,
+        getSingleEvent: getSingleEvent
     };
 })

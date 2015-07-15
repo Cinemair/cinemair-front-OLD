@@ -71,8 +71,8 @@ angular.module('cinemair', [
         url: '/schedule/:id',
         views: {
             'tab-schedule': {
-                templateUrl: 'templates/movie-detail.html',
-                controller: 'MovieDetailCtrl'
+                templateUrl: 'templates/schedule-detail.html',
+                controller: 'ScheduleDetailCtrl'
             }
         }
     })
