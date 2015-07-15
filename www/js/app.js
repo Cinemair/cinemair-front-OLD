@@ -44,7 +44,7 @@ angular.module('cinemair', [
     // setup an abstract state for the tabs directive
         .state('login', {
         cache: false,
-        url: '/',
+        url: '/?state&code',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
     })

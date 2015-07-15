@@ -1,6 +1,9 @@
 var serverURL = 'http://127.0.0.1:8000/api/v1';
+var googleClientId = "661976506904-t5hdjfsvggji8vt9k2jqfk1bs2st3c23.apps.googleusercontent.com"
+
 angular.module('cinemair.services', [])
-.factory('CinemairSrv', function($http) {
+
+.factory('CinemairSrv', function($http, $location) {
     getMovies = function() {
         return $http({
             method: 'GET',
@@ -57,13 +60,46 @@ angular.module('cinemair.services', [])
             event = data;
         });
     };
+    googleAuth = {
+        login: function() {
+            responseType = "code"
+            clientId = googleClientId
+            redirectUri = $location.absUrl();
+            scope = "email profile".replace(" ", "%20");
+            state = "google-login";
+            accessType = "offline";
+            url = "https://accounts.google.com/o/oauth2/auth"
+                    + "?response_type=" + responseType
+                    + "&client_id=" + clientId
+                    + "&redirect_uri=" + redirectUri
+                    + "&scope=" + scope
+                    + "&state=" + state
+                    //+ "&access_type=" + accessType
+            console.log(url);
+            window.location.href = url
+        },
+        loginOrRegisterWithGoogleAccount: function (code) {
+            return $http({
+                method: 'POST',
+                url: serverURL + '/auth',
+                data: {
+                    code: code,
+                    type: "google"
+                }
+            }).success(function(data) {
+                return data;
+            });
+        }
+    };
+
     return {
         getMovies: getMovies,
         getSingleMovie: getSingleMovie,
         getCinemas: getCinemas,
         getShows: getShows,
         getMovieShows: getMovieShows,
-        getEvents: getEvents,
         getSingleEvent: getSingleEvent
+        getEvents: getEvents,
+        googleAuth: googleAuth
     };
 })
