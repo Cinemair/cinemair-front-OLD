@@ -34,8 +34,8 @@
         <div class="list list-inset padding">
             <a class="item item-icon-right" href="http://maps.google.com/?q={{cinema.address}}" ng-repeat="show in shows">
                 <h2>{{show.cinema_info.name}}</h2>
+                <p>{{show.datetime|momentFormat:'LL'}}</p>
                 <p>{{show.cinema_info.address}}</p>
-                <p>{{showDate}}</p>
                 <i class="icon ion-chevron-right stable"></i>
             </a>
         </div>

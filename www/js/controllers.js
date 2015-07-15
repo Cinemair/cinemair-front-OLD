@@ -69,7 +69,6 @@ angular.module('cinemair.controllers', [])
     });
 
     var getSingleShowPromise = CinemairSrv.getSingleShow(movieId).then(function() {
-        $scope.showDate = moment().format('LL');
         $scope.shows = singleShows;
     });
 
