@@ -14,7 +14,6 @@ angular.module('cinemair.controllers', [])
             var groupedShows = _.groupBy(shows, function(show) {
                 return moment(show.datetime).format('Do MMM YYYY');
             });
-            console.log(groupedShows);
             $scope.shows = groupedShows;
         });
 })
@@ -28,50 +27,55 @@ angular.module('cinemair.controllers', [])
         .then(function() {
             $ionicLoading.hide();
             $ionicBackdrop.release();
-            console.log(movies);
             $scope.movies = movies;
         });
 })
 
-.controller('MovieDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv) {
-    $ionicBackdrop.retain();
+.controller('MovieDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, $q, CinemairSrv) {
     $ionicLoading.show({
         content: 'Loading movies'
     });
+
     var movieId = $stateParams.id;
-    CinemairSrv.getSingleMovie(movieId)
-        .then(function() {
 
-            <!-- load -->
-            $ionicLoading.hide();
-            $ionicBackdrop.release();
+    var getSingleMoviePromise = CinemairSrv.getSingleMovie(movieId).then(function() {
 
-            <!-- release -->
-            $scope.release = moment(movie.tmdb_info.release_date).format('LL');
+        <!-- release -->
+        $scope.release = moment(movie.tmdb_info.release_date).format('LL');
 
-            <!-- vote average -->
-            var votesAvg = Math.round(movie.tmdb_info.vote_average);
-            var votesArray = [];
-            for (i = 0; i < votesAvg; i++) {
-                votesArray.push(i);
-            }
+        <!-- vote average -->
+        var votesAvg = Math.round(movie.tmdb_info.vote_average);
+        var votesArray = [];
+        for (i = 0; i < votesAvg; i++) {
+            votesArray.push(i);
+        }
 
-            var votesRestArray = [];
-            for (i = 0; i < (10 - votesArray.length); i++) {
-                votesRestArray.push(i);
-            }
-            $scope.votes = votesArray;
-            $scope.votesrest = votesRestArray;
+        var votesRestArray = [];
+        for (i = 0; i < (10 - votesArray.length); i++) {
+            votesRestArray.push(i);
+        }
+        $scope.votes = votesArray;
+        $scope.votesrest = votesRestArray;
 
-            <!-- countries -->
-            $scope.countries = movie.tmdb_info.production_countries;
+        <!-- countries -->
+        $scope.countries = movie.tmdb_info.production_countries;
 
-            <!-- genres -->
-            $scope.genres = movie.tmdb_info.genres;
+        <!-- genres -->
+        $scope.genres = movie.tmdb_info.genres;
 
-            <!-- movie data -->
-            $scope.movie = movie;
-        });
+        <!-- movie data -->
+        $scope.movie = movie;
+
+    });
+
+    var getSingleShowPromise = CinemairSrv.getSingleShow(movieId).then(function() {
+        $scope.showDate = moment().format('LL');
+        $scope.shows = singleShows;
+    });
+
+    $q.all([getSingleMoviePromise, getSingleShowPromise]).then(function() {
+        $ionicLoading.hide();
+    })
 })
 
 .controller('CinemasCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv) {
@@ -83,7 +87,6 @@ angular.module('cinemair.controllers', [])
         .then(function() {
             $ionicLoading.hide();
             $ionicBackdrop.release();
-            console.log(cinemas);
             $scope.cinemas = cinemas;
         });
 })
@@ -103,7 +106,6 @@ angular.module('cinemair.controllers', [])
             var eventHour = moment(events.datetime).format('HH:mm');
 
             $scope.eventHour = eventHour;
-            console.log(groupedEvents);
             $scope.events = groupedEvents;
         });
 });
