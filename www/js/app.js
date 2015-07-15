@@ -59,56 +59,77 @@ angular.module('cinemair', [
     // Each tab has its own nav history stack:
 
     .state('tab.schedule', {
-            url: '/schedule',
-            views: {
-                'tab-schedule': {
-                    templateUrl: 'templates/tab-schedule.html',
-                    controller: 'ScheduleCtrl'
-                }
+        url: '/schedule',
+        views: {
+            'tab-schedule': {
+                templateUrl: 'templates/tab-schedule.html',
+                controller: 'ScheduleCtrl'
             }
-        })
-        .state('tab.movies', {
-            url: '/movies',
-            cache: false,
-            views: {
-                'tab-movies': {
-                    templateUrl: 'templates/tab-movies.html',
-                    controller: 'MoviesCtrl'
-                }
+        }
+    })
+    .state('tab.scheduled', {
+        url: '/schedule/:id',
+        views: {
+            'tab-schedule': {
+                templateUrl: 'templates/movie-detail.html',
+                controller: 'MovieDetailCtrl'
             }
-        })
-        .state('tab.movie', {
-            url: '/movies/:id',
-            cache: false,
-            views: {
-                'tab-movies': {
-                    templateUrl: 'templates/movie-detail.html',
-                    controller: 'MovieDetailCtrl'
-                }
+        }
+    })
+    .state('tab.movies', {
+        url: '/movies',
+        cache: false,
+        views: {
+            'tab-movies': {
+                templateUrl: 'templates/tab-movies.html',
+                controller: 'MoviesCtrl'
             }
-        })
-        .state('tab.cinemas', {
-            url: '/cinemas',
-            views: {
-                'tab-cinemas': {
-                    templateUrl: 'templates/tab-cinemas.html',
-                    controller: 'CinemasCtrl'
-                }
+        }
+    })
+    .state('tab.movie', {
+        url: '/movies/:id',
+        cache: false,
+        views: {
+            'tab-movies': {
+                templateUrl: 'templates/movie-detail.html',
+                controller: 'MovieDetailCtrl'
             }
-        })
-        .state('tab.dates', {
-            cache: false,
-            url: '/dates',
-            views: {
-                'tab-dates': {
-                    templateUrl: 'templates/tab-dates.html',
-                    controller: 'DatesCtrl'
-                }
+        }
+    })
+    .state('tab.cinemas', {
+        url: '/cinemas',
+        views: {
+            'tab-cinemas': {
+                templateUrl: 'templates/tab-cinemas.html',
+                controller: 'CinemasCtrl'
             }
-        })
+        }
+    })
+    .state('tab.dates', {
+        cache: false,
+        url: '/dates',
+        views: {
+            'tab-dates': {
+                templateUrl: 'templates/tab-dates.html',
+                controller: 'DatesCtrl'
+            }
+        }
+    })
+    .state('tab.date', {
+        url: '/dates/:id',
+        views: {
+            'tab-dates': {
+                templateUrl: 'templates/movie-detail.html',
+                controller: 'MovieDetailCtrl'
+            }
+        }
+    })
 
     // Use html5 mode (urls without #)
-    $locationProvider.html5Mode({enabled: true, requireBase: false});
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/');

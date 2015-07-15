@@ -33,7 +33,7 @@ angular.module('cinemair.services', [])
             shows = data;
         });
     };
-    getSingleShow = function(id) {
+    getMovieShows = function(id) {
         return $http({
             method: 'GET',
             url: serverURL + '/movies/' + id + '/shows'
@@ -54,7 +54,7 @@ angular.module('cinemair.services', [])
         getSingleMovie: getSingleMovie,
         getCinemas: getCinemas,
         getShows: getShows,
-        getSingleShow: getSingleShow,
+        getMovieShows: getMovieShows,
         getEvents: getEvents
     };
 })
