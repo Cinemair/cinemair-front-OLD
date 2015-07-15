@@ -1,8 +1,9 @@
 <ion-view view-title="{{movie.tmdb_info.original_title}}">
     <ion-content class="padding">
         <div class="list card">
-            <div class="item item-divider">
+            <div class="item item-divider item-icon-right">
                 <h2>{{event.show_info.cinema_info.name}}</h2>
+                <i class="icon ion-android-favorite assertive"></i>
             </div>
             <div class="item event-detail-date">
                 <span class="item-note">{{event.show_info.cinema_info.address}}</span>
@@ -10,11 +11,10 @@
             </div>
         </div>
         <div class="list card">
-            <div class="item item-icon-left item-icon-right">
+            <div class="item item-icon-left">
                 <i class="icon ion-videocamera"></i>
                 <h2>{{event.show_info.movie_info.tmdb_info.original_title}}</h2>
                 <p>{{event.show_info.movie_info.tmdb_info.tagline}}</p>
-                <i class="icon ion-android-favorite assertive"></i>
             </div>
             <div class="item item-image">
                 <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.backdrop_path}}">

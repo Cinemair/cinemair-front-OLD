@@ -98,8 +98,8 @@ angular.module('cinemair.services', [])
         getCinemas: getCinemas,
         getShows: getShows,
         getMovieShows: getMovieShows,
-        getSingleEvent: getSingleEvent
+        getSingleEvent: getSingleEvent,
         getEvents: getEvents,
         googleAuth: googleAuth
     };
-})
+});
