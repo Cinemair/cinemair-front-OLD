@@ -31,12 +31,13 @@
                 </p>
             </div>
         </div>
-        <div class="list card padding" ng-repeat="show in shows">
-            <h4>{{show.cinema_info.name}}</h4>
-            <span class="item-note">
-                {{show.cinema_info.address}}
-            </span>
-            <p>{{showDate}}</p>
+        <div class="list list-inset padding">
+            <a class="item item-icon-right" href="http://maps.google.com/?q={{cinema.address}}" ng-repeat="show in shows">
+                <h2>{{show.cinema_info.name}}</h2>
+                <p>{{show.cinema_info.address}}</p>
+                <p>{{showDate}}</p>
+                <i class="icon ion-chevron-right stable"></i>
+            </a>
         </div>
     </ion-content>
 </ion-view>
