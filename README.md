@@ -18,5 +18,5 @@ npm install
 - Execute gulp
 
 ```
-ionic serve
+gulp
 ```
