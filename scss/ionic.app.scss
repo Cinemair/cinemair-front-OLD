@@ -53,3 +53,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
         font-size: 24px;
     }
 }
+
+.subdued {
+    font-size: 14px;
+    padding: .25rem;
+    margin: .25rem;
+    background: $stable;
+}

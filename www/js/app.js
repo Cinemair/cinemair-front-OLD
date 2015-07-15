@@ -11,6 +11,13 @@ angular.module('cinemair', [
     'cinemair.services'
 ])
 
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.views.maxCache(5);
+    $ionicConfigProvider.views.transition('android');
+    $ionicConfigProvider.spinner.icon('android');
+    $ionicConfigProvider.scrolling.jsScrolling(false);
+})
+
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -35,6 +42,7 @@ angular.module('cinemair', [
 
     // setup an abstract state for the tabs directive
         .state('login', {
+        cache: false,
         url: '/',
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
@@ -67,6 +75,15 @@ angular.module('cinemair', [
                 }
             }
         })
+        .state('tab.movie', {
+            url: '/movies/:id',
+            views: {
+                'tab-movies': {
+                    templateUrl: 'templates/movie-detail.html',
+                    controller: 'MovieDetailCtrl'
+                }
+            }
+        })
         .state('tab.cinemas', {
             url: '/cinemas',
             views: {
@@ -77,6 +94,7 @@ angular.module('cinemair', [
             }
         })
         .state('tab.dates', {
+            cache: false,
             url: '/dates',
             views: {
                 'tab-dates': {

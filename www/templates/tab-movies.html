@@ -1,8 +1,8 @@
 <ion-view view-title="Movies">
-    <ion-content>
+    <ion-content has-bouncing>
         <div class="list ">
-            <a ng-repeat="movie in movies" class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#">
-                <img src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.poster_path}}"">
+            <a ng-repeat="movie in movies" class="item item-thumbnail-left item-icon-right" nav-transition="android" href="#/tab/movies/{{movie.id}}">
+                <img src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.poster_path}}">
                 <h2>{{movie.tmdb_info.original_title}}</h2>
                 <p>{{movie.tmdb_info.tagline}}</p>
                 <i class="icon ion-android-favorite icon-movies-fav assertive"></i>

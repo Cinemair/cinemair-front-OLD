@@ -7718,3 +7718,9 @@ a.button {
 
 .item-icon-right .icon {
   font-size: 24px; }
+
+.subdued {
+  font-size: 14px;
+  padding: .25rem;
+  margin: .25rem;
+  background: #f8f8f8; }
