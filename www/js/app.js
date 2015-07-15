@@ -8,7 +8,8 @@
 angular.module('cinemair', [
     'ionic',
     'cinemair.controllers',
-    'cinemair.services'
+    'cinemair.services',
+    'cinemair.filters'
 ])
 
 .config(function($ionicConfigProvider) {

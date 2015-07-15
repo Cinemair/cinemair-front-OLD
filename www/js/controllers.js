@@ -96,16 +96,11 @@ angular.module('cinemair.controllers', [])
     $ionicLoading.show({
         content: 'Loading events'
     });
+
     CinemairSrv.getEvents()
         .then(function() {
             $ionicLoading.hide();
             $ionicBackdrop.release();
-            var groupedEvents = _.groupBy(events, function(event) {
-                return moment(event.datetime).format('LL');
-            });
-            var eventHour = moment(events.datetime).format('HH:mm');
-
-            $scope.eventHour = eventHour;
-            $scope.events = groupedEvents;
+            $scope.events = events;
         });
 });
