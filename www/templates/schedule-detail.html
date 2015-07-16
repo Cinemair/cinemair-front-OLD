@@ -2,44 +2,44 @@
     <ion-content class="padding">
         <div class="list card">
             <div class="item item-divider item-icon-right">
-                <h2>{{event.show_info.cinema_info.name}}</h2>
+                <h2>{{show.cinema_info.name}}</h2>
                 <i class="icon ion-android-favorite assertive"></i>
             </div>
             <div class="item event-detail-date">
-                <a class="item-note" href="http://maps.google.com/?q={{event.show_info.cinema_info.address}},{{event.show_info.cinema_info.city}}, {{event.show_info.cinema_info.country}}">{{event.show_info.cinema_info.address}} <span class="icon icon ion-android-open"
+                <a class="item-note" href="http://maps.google.com/?q={{show.cinema_info.address}},{{show.cinema_info.city}}, {{show.cinema_info.country}}">{{show.cinema_info.address}} <span class="icon icon ion-android-open"
                 ></span> </a>
-                <h3>{{event.show_info.datetime|momentFormat: 'LL'}}</h3>
+                <h3>{{show.datetime|momentFormat: 'LL'}}</h3>
             </div>
         </div>
         <div class="list card">
             <div class="item item-icon-left">
                 <i class="icon ion-quote stable"></i>
-                <h2>{{event.show_info.movie_info.tmdb_info.original_title}}</h2>
-                <p>{{event.show_info.movie_info.tmdb_info.tagline}}</p>
+                <h2>{{show.movie_info.tmdb_info.original_title}}</h2>
+                <p>{{show.movie_info.tmdb_info.tagline}}</p>
             </div>
             <div class="item item-image">
-                <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.backdrop_path}}">
+                <img src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.backdrop_path}}">
             </div>
-            <div class="item">
-                <span ng-repeat="vote in votes" class="vote-avg">
+            <div class="item item-body">
+                <span ng-repeat="n in [] | range:show.movie_info.tmdb_info.vote_average" class="vote-avg">
                     <i class="icon ion-android-star energized"></i>
                 </span>
-                <span ng-repeat="vote in votesrest">
+                <span ng-repeat="n in [] | rangeInvert:show.movie_info.tmdb_info.vote_average">
                     <i class="icon ion-android-star-outline energized"></i>
                 </span>
                 <p>
-                    {{event.show_info.movie_info.tmdb_info.overview}}
+                    {{show.movie_info.tmdb_info.overview}}
                 </p>
                 <p>
                     <span class="subdued">
                         <span class="icon ion-android-calendar"></span>
-                        {{event.show_info.movie_info.tmdb_info.release_date|momentFormat: 'LL'}}
+                        {{show.movie_info.tmdb_info.release_date|momentFormat: 'LL'}}
                     </span>
-                    <span class="subdued" ng-repeat="country in event.show_info.movie_info.tmdb_info.production_countries">
+                    <span class="subdued" ng-repeat="country in show.movie_info.tmdb_info.production_countries">
                         <span class="icon ion-location"></span>
                         {{country.name}}
                     </span>
-                    <span class="subdued" ng-repeat="genre in event.show_info.movie_info.tmdb_info.genres">
+                    <span class="subdued" ng-repeat="genre in show.movie_info.tmdb_info.genres">
                         <span class="icon ion-happy-outline">
                         </span>{{genre.name}}
                     </span>

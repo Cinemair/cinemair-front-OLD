@@ -41,7 +41,10 @@
                             <h2>Movie Shows</h2>
                             <i class="icon ion-android-calendar stable"></i>
                         </div>
-                        <a class="item item-icon-right" href="http://maps.google.com/?q={{show.cinema_info.address}}" ng-repeat="show in shows">
+                        <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
+                            <p>
+                                tab/dates/{{show.id}}
+                            </p>
                             <h2>{{show.cinema_info.name}}</h2>
                             <p>{{show.cinema_info.address}}</p>
                             <p>{{show.datetime|momentFormat:'LL'}}</p>
