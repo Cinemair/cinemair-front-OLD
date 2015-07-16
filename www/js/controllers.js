@@ -60,7 +60,7 @@ angular.module('cinemair.controllers', [])
         content: 'Loading movies'
     });
     var movieId = $stateParams.id;
-    
+
     var getMovies = CinemairSrv.getMovies().then(function() {
         $scope.movies = movies;
     });
@@ -69,11 +69,21 @@ angular.module('cinemair.controllers', [])
         $scope.shows = singleShows;
     });
 
+    $scope.slideHasChanged = function(index) {
+        $ionicLoading.show({
+            content: 'Loading movies'
+        });
+        var getMovieShowsPromise = CinemairSrv.getMovieShows(index).then(function() {
+            $ionicLoading.hide();
+            $scope.shows = singleShows;
+        });
+    }
+
     $q.all([getMovies, getMovieShowsPromise]).then(function() {
         $ionicLoading.hide();
         $ionicSlideBoxDelegate.update();
         $scope.movieid = movieId - 1;
-    })
+    });
 })
 
 .controller('CinemasCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv) {

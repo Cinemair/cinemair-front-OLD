@@ -4,7 +4,7 @@
             <ion-slide ng-repeat="movie in movies">
                 <div class="list card">
                     <div class="item item-icon-left item-icon-right">
-                        <i class="icon ion-videocamera"></i>
+                        <i class="icon ion-quote stable"></i>
                         <h2>{{movie.tmdb_info.original_title}}</h2>
                         <p>{{movie.tmdb_info.tagline}}</p>
                     </div>
@@ -22,11 +22,15 @@
                             {{movie.tmdb_info.overview}}
                         </p>
                         <p>
-                            <span class="subdued">{{movie.tmdb_info.release_date|momentFormat: 'LL'}}</span>
+                            <span class="subdued">
+                                <span class="icon ion-android-calendar"></span>
+                                {{movie.tmdb_info.release_date|momentFormat: 'LL'}}</span>
                             <span class="subdued" ng-repeat="country in movie.tmdb_info.production_countries">
+                                <span class="icon ion-location"></span>
                                 {{country.name}}
                             </span>
                             <span class="subdued" ng-repeat="genre in movie.tmdb_info.genres">
+                                <span class="icon ion-happy-outline">
                                 {{genre.name}}
                             </span>
                         </p>
