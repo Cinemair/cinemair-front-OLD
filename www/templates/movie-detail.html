@@ -24,25 +24,30 @@
                         <p>
                             <span class="subdued">
                                 <span class="icon ion-android-calendar"></span>
-                                {{movie.tmdb_info.release_date|momentFormat: 'LL'}}</span>
+                                {{movie.tmdb_info.release_date|momentFormat: 'LL'}}
+                            </span>
                             <span class="subdued" ng-repeat="country in movie.tmdb_info.production_countries">
                                 <span class="icon ion-location"></span>
                                 {{country.name}}
                             </span>
                             <span class="subdued" ng-repeat="genre in movie.tmdb_info.genres">
                                 <span class="icon ion-happy-outline">
-                                {{genre.name}}
+                                </span>{{genre.name}}
                             </span>
                         </p>
                     </div>
-                </div>
-                <div class="list list-inset padding">
-                    <a class="item item-icon-right" href="http://maps.google.com/?q={{show.cinema_info.address}}" ng-repeat="show in shows">
-                        <h2>{{show.cinema_info.name}}</h2>
-                        <p>{{show.datetime|momentFormat:'LL'}}</p>
-                        <p>{{show.cinema_info.address}}</p>
-                        <i class="icon ion-android-favorite stable"></i>
-                    </a>
+                    <div class="list">
+                        <div class="item item-divider item-icon-left">
+                            <h2>Movie Shows</h2>
+                            <i class="icon ion-android-calendar stable"></i>
+                        </div>
+                        <a class="item item-icon-right" href="http://maps.google.com/?q={{show.cinema_info.address}}" ng-repeat="show in shows">
+                            <h2>{{show.cinema_info.name}}</h2>
+                            <p>{{show.cinema_info.address}}</p>
+                            <p>{{show.datetime|momentFormat:'LL'}}</p>
+                            <i class="icon ion-android-favorite stable"></i>
+                        </a>
+                    </div>
                 </div>
             </ion-slide>
         </ion-slide-box>

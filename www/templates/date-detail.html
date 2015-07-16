@@ -1,0 +1,62 @@
+<ion-view view-title="{{show.tmdb_info.original_title}}">
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item item-divider item-icon-right">
+                <h2>{{show.cinema_info.name}}</h2>
+                <i class="icon ion-android-favorite assertive"></i>
+            </div>
+            <div class="item event-detail-date">
+                <a class="item-note" href="http://maps.google.com/?q={{show.cinema_info.address}},{{show.cinema_info.city}}, {{show.cinema_info.country}}">{{show.cinema_info.address}} <span class="icon icon ion-android-open"
+                ></span> </a>
+                <h3>{{show.datetime|momentFormat: 'LL'}}</h3>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item item-icon-left">
+                <i class="icon ion-quote stable"></i>
+                <h2>{{show.movie_info.tmdb_info.original_title}}</h2>
+                <p>{{show.movie_info.tmdb_info.tagline}}</p>
+            </div>
+            <div class="item item-image">
+                <img src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.backdrop_path}}">
+            </div>
+            <div class="item item-body">
+                <span ng-repeat="vote in votes" class="vote-avg">
+                    <i class="icon ion-android-star energized"></i>
+                </span>
+                <span ng-repeat="vote in votesrest">
+                    <i class="icon ion-android-star-outline energized"></i>
+                </span>
+                <p>
+                    {{show.movie_info.tmdb_info.overview}}
+                </p>
+                <p>
+                    <span class="subdued">
+                        <span class="icon ion-android-calendar"></span>
+                        {{show.movie_info.tmdb_info.release_date|momentFormat: 'LL'}}
+                    </span>
+                    <span class="subdued" ng-repeat="country in show.movie_info.tmdb_info.production_countries">
+                        <span class="icon ion-location"></span>
+                        {{country.name}}
+                    </span>
+                    <span class="subdued" ng-repeat="genre in show.movie_info.tmdb_info.genres">
+                        <span class="icon ion-happy-outline">
+                        </span>{{genre.name}}
+                    </span>
+                </p>
+            </div>
+            <div class="list">
+                <div class="item item-divider item-icon-left">
+                    <h2>Movie Shows</h2>
+                    <i class="icon ion-android-calendar stable"></i>
+                </div>
+                <a class="item item-icon-right" href="http://maps.google.com/?q={{show.cinema_info.address}}" ng-repeat="show in movieShows">
+                    <h2>{{show.cinema_info.name}}</h2>
+                    <p>{{show.cinema_info.address}}</p>
+                    <p>{{show.datetime|momentFormat:'LL'}}</p>
+                    <i class="icon ion-android-favorite stable"></i>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -66,7 +66,7 @@ angular.module('cinemair.controllers', [])
     });
 
     var getMovieShowsPromise = CinemairSrv.getMovieShows(movieId).then(function() {
-        $scope.shows = singleShows;
+        $scope.shows = movieShows;
     });
 
     $scope.slideHasChanged = function(index) {
@@ -75,7 +75,7 @@ angular.module('cinemair.controllers', [])
         });
         var getMovieShowsPromise = CinemairSrv.getMovieShows(index).then(function() {
             $ionicLoading.hide();
-            $scope.shows = singleShows;
+            $scope.shows = movieShows;
         });
     }
 
@@ -113,15 +113,21 @@ angular.module('cinemair.controllers', [])
         });
 })
 
-.controller('ScheduleDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, $q, CinemairSrv) {
+.controller('ScheduleDetailCtrl', function($scope, $ionicLoading, $stateParams, CinemairSrv) {
     $ionicLoading.show({
         content: 'Loading movies'
     });
 
-    var movieId = $stateParams.id;
+    var EventID = $stateParams.id;
 
-    var getSingleEvent = CinemairSrv.getSingleEvent(movieId).then(function() {
-        $ionicLoading.hide();
-        $scope.event = event;
+    CinemairSrv.getSingleShow(EventID).then(function() {
+        $scope.show = show;
+        CinemairSrv.getMovieShows(show.movie).then(function() {
+            $ionicLoading.hide();
+            $scope.movieShows = movieShows;
+        });
     });
+
+
+
 });

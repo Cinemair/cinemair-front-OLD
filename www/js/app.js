@@ -119,8 +119,8 @@ angular.module('cinemair', [
         url: '/dates/:id',
         views: {
             'tab-dates': {
-                templateUrl: 'templates/movie-detail.html',
-                controller: 'MovieDetailCtrl'
+                templateUrl: 'templates/date-detail.html',
+                controller: 'ScheduleDetailCtrl'
             }
         }
     })
