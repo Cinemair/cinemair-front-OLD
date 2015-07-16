@@ -7715,8 +7715,7 @@ a.button {
     flex-direction: column;
     align-content: center;
     height: 100vh;
-    position: relative;
-    z-index: -1; }
+    position: relative; }
     .pane.login-view:after, .view.login-view:after {
       content: '';
       width: 100%;
