@@ -4,7 +4,7 @@ var googleClientId = "661976506904-t5hdjfsvggji8vt9k2jqfk1bs2st3c23.apps.googleu
 angular.module('cinemair.services', [])
 
 
-.factory('CinemairSrv', ["$http", "$location", "UserSrv", function($http, $location, UserSrv) {
+.factory('CinemairSrv', ["$http", "$location", "UserSrv", "$rootScope", function($http, $location, UserSrv, $rootScope) {
 
     _headers = function() {
         headers = {};
@@ -41,8 +41,6 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/movies/' + id + '/shows'
-        }).success(function(data) {
-            movieShows = data;
         });
     };
 
@@ -63,8 +61,6 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/shows'
-        }).success(function(data) {
-            shows = data;
         });
     };
 
@@ -73,8 +69,6 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/shows/' + id
-        }).success(function(data) {
-            show = data;
         });
     };
 
@@ -84,8 +78,6 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/events'
-        }).success(function(data) {
-            events = data;
         });
     };
     getSingleEvent = function(id) {
@@ -98,15 +90,44 @@ angular.module('cinemair.services', [])
         });
     };
 
+    createEvent = function(showId) {
+        return $http({
+            headers: _headers(),
+            method: 'POST',
+            url: serverURL + '/events',
+            data: {
+                show: showId,
+                user: $rootScope.user.id
+            }
+        }).success(function(response) {
+            return response;
+        });
+    };
+    deleteEvent = function (eventId) {
+        return $http({
+            headers: _headers(),
+            method: 'DELETE',
+            url: serverURL + '/events/' + eventId,
+        }).success(function(response) {
+            return response;
+        });
+    };
+
+
     return {
         getCinemas: getCinemas,
+
         getMovies: getMovies,
         getSingleMovie: getSingleMovie,
         getMovieShows: getMovieShows,
+
         getShows: getShows,
         getSingleShow: getSingleShow,
+
         getEvents: getEvents,
-        getSingleEvent: getSingleEvent
+        getSingleEvent: getSingleEvent,
+        createEvent: createEvent,
+        deleteEvent: deleteEvent
     };
 }])
 

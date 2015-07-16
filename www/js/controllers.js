@@ -23,7 +23,7 @@ angular.module('cinemair.controllers', [])
         $ionicLoading.show({content: 'Loading shows'});
 
         code = $stateParams.code
-        UserSrv.googleAuth.loginOrRegisterWithGoogleAccount(code).then(function(response){
+        UserSrv.googleAuth.loginOrRegisterWithGoogleAccount(code).then(function(){
             _goToSchedule()
             $ionicLoading.hide();
             $ionicBackdrop.release();
@@ -39,15 +39,39 @@ angular.module('cinemair.controllers', [])
         content: 'Loading shows'
     });
 
-    CinemairSrv.getShows()
-        .then(function() {
-            $ionicLoading.hide();
-            $ionicBackdrop.release();
-            var groupedShows = _.groupBy(shows, function(show) {
-                return moment(show.datetime).format('Do MMM YYYY');
-            });
-            $scope.shows = groupedShows;
+    CinemairSrv.getShows().success(function(shows) {
+        $ionicLoading.hide();
+        $ionicBackdrop.release();
+        var groupedShows = _.groupBy(shows, function(show) {
+            return moment(show.datetime).format('Do MMM YYYY');
         });
+        $scope.shows = groupedShows;
+    });
+
+    $scope.toggleShow = function(show) {
+        if (show.event === null){
+            // Create
+            CinemairSrv.createEvent(show.id).then(function() {
+                CinemairSrv.getShows().success(function(shows) {
+                    var groupedShows = _.groupBy(shows, function(show) {
+                        return moment(show.datetime).format('Do MMM YYYY');
+                    });
+                    $scope.shows = groupedShows;
+                });
+            });
+        }
+        else {
+            // Delete
+            CinemairSrv.deleteEvent(show.event).then(function() {
+                CinemairSrv.getShows().success(function(shows) {
+                    var groupedShows = _.groupBy(shows, function(show) {
+                        return moment(show.datetime).format('Do MMM YYYY');
+                    });
+                    $scope.shows = groupedShows;
+                });
+            });
+        }
+    };
 })
 
 .controller('MoviesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv) {
@@ -73,7 +97,7 @@ angular.module('cinemair.controllers', [])
         $scope.movies = movies;
     });
 
-    var getMovieShowsPromise = CinemairSrv.getMovieShows(movieId).then(function() {
+    var getMovieShowsPromise = CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
         $scope.shows = movieShows;
     });
 
@@ -81,7 +105,7 @@ angular.module('cinemair.controllers', [])
         $ionicLoading.show({
             content: 'Loading movies'
         });
-        var getMovieShowsPromise = CinemairSrv.getMovieShows($scope.movies[index].id).then(function() {
+        var getMovieShowsPromise = CinemairSrv.getMovieShows($scope.movies[index].id).success(function(movieShows) {
             $scope.shows = movieShows;
             $ionicLoading.hide();
         });
@@ -92,6 +116,26 @@ angular.module('cinemair.controllers', [])
         $ionicSlideBoxDelegate.update();
         $scope.movieid = movieId - 1;
     });
+
+    $scope.toggleShow = function(show) {
+        console.log("show: ", show);
+        if (show.event === null){
+            // Create
+            CinemairSrv.createEvent(show.id).then(function() {
+                CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
+                    $scope.shows = movieShows;
+                });
+            });
+        }
+        else {
+            // Delete
+            CinemairSrv.deleteEvent(show.event).then(function() {
+                CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
+                    $scope.shows = movieShows;
+                });
+            });
+        }
+    };
 })
 
 .controller('CinemasCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv) {
@@ -113,12 +157,11 @@ angular.module('cinemair.controllers', [])
         content: 'Loading events'
     });
     var movieId = $stateParams.id;
-    CinemairSrv.getEvents()
-        .then(function() {
-            $ionicLoading.hide();
-            $ionicBackdrop.release();
-            $scope.events = events;
-        });
+    CinemairSrv.getEvents().success(function(events) {
+        $ionicLoading.hide();
+        $ionicBackdrop.release();
+        $scope.events = events;
+    });
 })
 
 .controller('ScheduleDetailCtrl', function($scope, $ionicLoading, $stateParams, $q, CinemairSrv) {
@@ -128,9 +171,27 @@ angular.module('cinemair.controllers', [])
 
     var EventID = $stateParams.id;
 
-    CinemairSrv.getSingleShow(EventID).then(function() {
-        console.log(show);
+    CinemairSrv.getSingleShow(EventID).success(function(show) {
         $ionicLoading.hide();
         $scope.show = show;
     });
+
+    $scope.toggleShow = function(show) {
+        if (show.event === null){
+            // Create
+            CinemairSrv.createEvent(show.id).then(function() {
+                CinemairSrv.getSingleShow(EventID).success(function(show) {
+                    $scope.show = show;
+                });
+            });
+        }
+        else {
+            // Delete
+            CinemairSrv.deleteEvent(show.event).then(function() {
+                CinemairSrv.getSingleShow(EventID).success(function(show) {
+                    $scope.show = show;
+                });
+            });
+        }
+    };
 });

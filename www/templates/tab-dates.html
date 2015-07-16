@@ -10,7 +10,9 @@
                     <h2>{{ show.movie_info.tmdb_info.original_title }}</h2>
                     <p>{{ show.cinema_info.name }}</p>
                     <p>{{ show.cinema_info.address }}</p>
-                    <i class="icon ion-android-favorite stable"></i>
+                    <i class="icon ion-android-favorite"
+                       ng-class="{assertive: show.event, stable: !show.event}"
+                       ng-click="toggleShow(show)"></i>
                 </a>
             </div>
         </div>

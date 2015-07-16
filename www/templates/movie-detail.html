@@ -48,7 +48,9 @@
                             <h2>{{show.cinema_info.name}}</h2>
                             <p>{{show.cinema_info.address}}</p>
                             <p>{{show.datetime|momentFormat:'LL'}}</p>
-                            <i class="icon ion-android-favorite stable"></i>
+                            <i class="icon ion-android-favorite"
+                               ng-class="{assertive: show.event, stable: !show.event}"
+                               ng-click="toggleShow(show)"></i>
                         </a>
                     </div>
                 </div>
