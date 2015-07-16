@@ -19,7 +19,7 @@ angular.module('cinemair', [
     $ionicConfigProvider.scrolling.jsScrolling(false);
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, UserSrv) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -31,6 +31,10 @@ angular.module('cinemair', [
             StatusBar.styleLightContent();
         }
     });
+
+    $rootScope.logout = function(){
+        UserSrv.logout();
+    };
 })
 
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $provide, $httpProvider) {

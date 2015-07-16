@@ -6,7 +6,8 @@
                 <h2>{{ event.show_info.movie_info.tmdb_info.original_title }}</h2>
                 <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>
                 <p>{{ event.show_info.datetime|fromNow }}</p>
-                <i class="icon ion-android-favorite assertive"></i>
+                <i class="icon ion-android-favorite assertive"
+                   ng-click="$event.preventDefault(); deleteEvent(event);"></i>
             </a>
         </div>
     </ion-content>

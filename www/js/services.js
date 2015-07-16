@@ -115,7 +115,7 @@ angular.module('cinemair.services', [])
             return angular.fromJson(value);
         },
         remove: function(key) {
-            $window.localStorage.remove(key);
+            $window.localStorage.removeItem(key);
         }
     }
 }])
@@ -143,6 +143,7 @@ angular.module('cinemair.services', [])
     logout = function() {
         $rootScope.user = null;
         $localStorage.remove('user');
+        $window.location.href = "/";
     };
 
     googleAuth = {

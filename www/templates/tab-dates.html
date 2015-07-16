@@ -12,7 +12,7 @@
                     <p>{{ show.cinema_info.address }}</p>
                     <i class="icon ion-android-favorite"
                        ng-class="{assertive: show.event, stable: !show.event}"
-                       ng-click="toggleShow(show)"></i>
+                       ng-click="$event.preventDefault(); toggleShow(show);"></i>
                 </a>
             </div>
         </div>
