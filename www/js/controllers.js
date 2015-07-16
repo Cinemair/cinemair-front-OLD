@@ -53,6 +53,9 @@ angular.module('cinemair.controllers', [])
     });
 
     $scope.toggleShow = function(show) {
+        $ionicLoading.show({
+            content: 'Loading shows'
+        });
         if (show.event === null){
             // Create
             CinemairSrv.createEvent(show.id).then(function() {
@@ -61,6 +64,7 @@ angular.module('cinemair.controllers', [])
                         return moment(show.datetime).format('Do MMM YYYY');
                     });
                     $scope.shows = groupedShows;
+                    $ionicLoading.hide();
                 });
             });
         }
@@ -72,6 +76,7 @@ angular.module('cinemair.controllers', [])
                         return moment(show.datetime).format('Do MMM YYYY');
                     });
                     $scope.shows = groupedShows;
+                    $ionicLoading.hide();
                 });
             });
         }
@@ -130,12 +135,15 @@ angular.module('cinemair.controllers', [])
     });
 
     $scope.toggleShow = function(show) {
-        console.log("show: ", show);
+        $ionicLoading.show({
+            content: 'Loading shows'
+        });
         if (show.event === null){
             // Create
             CinemairSrv.createEvent(show.id).then(function() {
                 CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
                     $scope.shows = movieShows;
+                    $ionicLoading.hide();
                 });
             });
         }
@@ -144,6 +152,7 @@ angular.module('cinemair.controllers', [])
             CinemairSrv.deleteEvent(show.event).then(function() {
                 CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
                     $scope.shows = movieShows;
+                    $ionicLoading.hide();
                 });
             });
         }
@@ -181,10 +190,14 @@ angular.module('cinemair.controllers', [])
         $scope.events = events;
     });
     $scope.deleteEvent = function(event) {
+        $ionicLoading.show({
+            content: 'Loading shows'
+        });
         // Delete
         CinemairSrv.deleteEvent(event.id).then(function() {
             CinemairSrv.getEvents().success(function(events) {
                 $scope.events = events;
+                $ionicLoading.hide();
             });
         });
     };
