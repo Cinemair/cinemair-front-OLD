@@ -1,16 +1,12 @@
 <ion-view view-title="Login" class="login-view">
-    <h1>Cinemair</h1>
-    <div class="list padding login-form">
-        <!--
-        <label class="item item-input">
-            <input type="text" placeholder="First Name">
-        </label>
-        <label class="item item-input">
-            <input type="email" placeholder="Email">
-        </label>
-        -->
-        <button class="button button-block button-assertive" ng-click="login()">
-            Login with your Google Account
-        </button>
-    </div>
+    <img class="login-logo" src="img/logo.png" alt="Cinemair">
+    <h1 class="title login-title">Cinemair</h1>
+    <hr>
+    <p class="tagline">
+        Hot summers and no cinema
+        <br> makes madrileños dull people
+    </p>
+    <a class="button button-dark icon-left ion-social-google padding" ng-click="login()">
+        Login with Google
+    </a>
 </ion-view>

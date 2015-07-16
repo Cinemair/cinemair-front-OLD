@@ -7693,26 +7693,66 @@ a.button {
 .tab-item .icon {
   font-size: 1.6rem; }
 
+.title {
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif; }
+  .title.login-title {
+    font-size: 48px;
+    font-weight: 700; }
+
 .bar .button.button-icon:before {
   font-size: 1.5rem; }
-
-.login-view {
-  background: url("https://lh5.googleusercontent.com/-AJ-T4AGV4Q8/VF5nZDyThfI/AAAAAAAAaI0/QVTHtKROHnE/s785-no/14%2B-%2B137") no-repeat center right #212121;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  height: 100vh; }
-  .login-view h1 {
-    color: #dddddd;
-    text-align: center;
-    margin-top: 30vh; }
 
 .login-form {
   flex: 1; }
 
 .pane, .view {
   background: url("../img/logo.png") no-repeat center center #212121; }
+  .pane.login-view, .view.login-view {
+    background: url("../img/background.jpg") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    height: 100vh;
+    position: relative;
+    z-index: -1; }
+    .pane.login-view:after, .view.login-view:after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(239, 71, 58, 0.8); }
+    .pane.login-view .login-logo, .view.login-view .login-logo {
+      z-index: 2;
+      width: 50%;
+      margin: 0 auto;
+      margin-top: 20vh; }
+    .pane.login-view .login-title, .view.login-view .login-title {
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      z-index: 2; }
+    .pane.login-view hr, .view.login-view hr {
+      width: 30vw;
+      margin: 1rem auto;
+      z-index: 2; }
+    .pane.login-view .tagline, .view.login-view .tagline {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+      line-height: 1.5;
+      z-index: 2; }
+    .pane.login-view .button, .view.login-view .button {
+      font-size: 18px;
+      font-family: 'Open Sans', sans-serif;
+      z-index: 2;
+      margin: 15vh 1rem;
+      border-radius: 5px; }
 
 .item-icon-right .icon {
   font-size: 24px; }
