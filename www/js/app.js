@@ -60,6 +60,7 @@ angular.module('cinemair', [
 
     .state('tab.schedule', {
         url: '/schedule',
+        cache: false,
         views: {
             'tab-schedule': {
                 templateUrl: 'templates/tab-schedule.html',

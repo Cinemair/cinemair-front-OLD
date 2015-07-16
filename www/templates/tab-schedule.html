@@ -2,11 +2,11 @@
     <ion-content has-bouncing>
         <div class="list">
             <a ng-repeat="event in events" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="tab/schedule/{{event.show}}">
-                    <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.poster_path}}">
-                    <h2>{{ event.show_info.movie_info.tmdb_info.original_title }}</h2>
-                    <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>
-                    <p>{{ event.show_info.datetime|fromNow }}</p>
-                    <i class="icon ion-android-favorite assertive"></i>
+                <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.poster_path}}">
+                <h2>{{ event.show_info.movie_info.tmdb_info.original_title }}</h2>
+                <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>
+                <p>{{ event.show_info.datetime|fromNow }}</p>
+                <i class="icon ion-android-favorite assertive"></i>
             </a>
         </div>
     </ion-content>

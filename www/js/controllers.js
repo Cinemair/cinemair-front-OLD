@@ -158,7 +158,6 @@ angular.module('cinemair.controllers', [])
     CinemairSrv.getEvents().success(function(events) {
         $ionicLoading.hide();
         $ionicBackdrop.release();
-        console.log(events);
         $scope.events = events;
     });
 })
