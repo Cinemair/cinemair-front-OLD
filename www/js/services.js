@@ -23,17 +23,6 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/movies'
-        }).success(function(data) {
-            movies = data;
-        });
-    };
-    getSingleMovie = function(id) {
-        return $http({
-            headers: _headers(),
-            method: 'GET',
-            url: serverURL + '/movies/' + id
-        }).success(function(data) {
-            movie = data;
         });
     };
     getMovieShows = function(id) {
@@ -43,15 +32,12 @@ angular.module('cinemair.services', [])
             url: serverURL + '/movies/' + id + '/shows'
         });
     };
-
     // CINEMAS
     getCinemas = function() {
         return $http({
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/cinemas'
-        }).success(function(data) {
-            cinemas = data;
         });
     };
 
@@ -80,15 +66,6 @@ angular.module('cinemair.services', [])
             url: serverURL + '/events'
         });
     };
-    getSingleEvent = function(id) {
-        return $http({
-            headers: _headers(),
-            method: 'GET',
-            url: serverURL + '/events/' + id
-        }).success(function(data) {
-            event = data;
-        });
-    };
 
     createEvent = function(showId) {
         return $http({
@@ -99,8 +76,6 @@ angular.module('cinemair.services', [])
                 show: showId,
                 user: $rootScope.user.id
             }
-        }).success(function(response) {
-            return response;
         });
     };
     deleteEvent = function (eventId) {
@@ -108,8 +83,6 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'DELETE',
             url: serverURL + '/events/' + eventId,
-        }).success(function(response) {
-            return response;
         });
     };
 
@@ -118,14 +91,12 @@ angular.module('cinemair.services', [])
         getCinemas: getCinemas,
 
         getMovies: getMovies,
-        getSingleMovie: getSingleMovie,
         getMovieShows: getMovieShows,
 
         getShows: getShows,
         getSingleShow: getSingleShow,
 
         getEvents: getEvents,
-        getSingleEvent: getSingleEvent,
         createEvent: createEvent,
         deleteEvent: deleteEvent
     };
