@@ -33,7 +33,7 @@ angular.module('cinemair', [
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider, $provide, $httpProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -42,7 +42,7 @@ angular.module('cinemair', [
     $stateProvider
 
     // setup an abstract state for the tabs directive
-        .state('login', {
+    .state('login', {
         cache: false,
         url: '/?state&code',
         templateUrl: 'templates/login.html',
@@ -123,7 +123,32 @@ angular.module('cinemair', [
                 controller: 'ScheduleDetailCtrl'
             }
         }
-    })
+    });
+
+    defaultHeaders = {
+        "Content-Type": "application/json",
+        "Accept-Language": "en"
+    };
+    $httpProvider.defaults.headers.delete = defaultHeaders;
+    $httpProvider.defaults.headers.patch = defaultHeaders;
+    $httpProvider.defaults.headers.post = defaultHeaders;
+    $httpProvider.defaults.headers.put = defaultHeaders;
+
+    // Interceptor if user is not legin
+    authHttpIntercept = function($q, $window){
+        httpResponseError = function(response) {
+            if (response.status === 401) {
+                $window.location.href = "/";
+            }
+            return $q.reject(response);
+        };
+
+        return {
+            responseError: httpResponseError
+        };
+    };
+    $provide.factory("authHttpIntercept", ["$q", "$window", authHttpIntercept])
+    $httpProvider.interceptors.push("authHttpIntercept")
 
     // Use html5 mode (urls without #)
     $locationProvider.html5Mode({

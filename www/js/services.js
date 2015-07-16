@@ -3,9 +3,24 @@ var googleClientId = "661976506904-t5hdjfsvggji8vt9k2jqfk1bs2st3c23.apps.googleu
 
 angular.module('cinemair.services', [])
 
-.factory('CinemairSrv', function($http, $location) {
+
+.factory('CinemairSrv', ["$http", "$location", "UserSrv", function($http, $location, UserSrv) {
+
+    _headers = function() {
+        headers = {};
+
+        // Authorization token
+        token = UserSrv.getAuthToken();
+        if (!_.isNull(token) && !_.isUndefined(token))
+            headers["Authorization"] = "Bearer " + token;
+
+        return headers;
+    };
+
+    // MOVIES
     getMovies = function() {
         return $http({
+            headers: _headers(),
             method: 'GET',
             url: serverURL + '/movies'
         }).success(function(data) {
@@ -14,36 +29,45 @@ angular.module('cinemair.services', [])
     };
     getSingleMovie = function(id) {
         return $http({
+            headers: _headers(),
             method: 'GET',
             url: serverURL + '/movies/' + id
         }).success(function(data) {
             movie = data;
         });
     };
-    getCinemas = function() {
-        return $http({
-            method: 'GET',
-            url: serverURL + '/cinemas'
-        }).success(function(data) {
-            cinemas = data;
-        });
-    };
-    getShows = function() {
-        return $http({
-            method: 'GET',
-            url: serverURL + '/shows'
-        }).success(function(data) {
-            shows = data;
-        });
-    };
     getMovieShows = function(id) {
         return $http({
+            headers: _headers(),
             method: 'GET',
             url: serverURL + '/movies/' + id + '/shows'
         }).success(function(data) {
             movieShows = data;
         });
     };
+
+    // CINEMAS
+    getCinemas = function() {
+        return $http({
+            headers: _headers(),
+            method: 'GET',
+            url: serverURL + '/cinemas'
+        }).success(function(data) {
+            cinemas = data;
+        });
+    };
+
+    // SHOES
+    getShows = function() {
+        return $http({
+            headers: _headers(),
+            method: 'GET',
+            url: serverURL + '/shows'
+        }).success(function(data) {
+            shows = data;
+        });
+    };
+
     getSingleShow = function(id) {
         return $http({
             method: 'GET',
@@ -52,8 +76,11 @@ angular.module('cinemair.services', [])
             show = data;
         });
     };
+
+    // EVENTS
     getEvents = function() {
         return $http({
+            headers: _headers(),
             method: 'GET',
             url: serverURL + '/events'
         }).success(function(data) {
@@ -62,14 +89,71 @@ angular.module('cinemair.services', [])
     };
     getSingleEvent = function(id) {
         return $http({
+            headers: _headers(),
             method: 'GET',
             url: serverURL + '/events/' + id
         }).success(function(data) {
             event = data;
         });
     };
+
+    return {
+        getCinemas: getCinemas,
+        getMovies: getMovies,
+        getSingleMovie: getSingleMovie,
+        getMovieShows: getMovieShows,
+        getShows: getShows,
+        getSingleShow: getSingleShow,
+        getEvents: getEvents,
+        getSingleEvent: getSingleEvent
+    };
+}])
+
+.factory('$localStorage', ['$window', function($window) {
+    return {
+        set: function(key, value) {
+            $window.localStorage.setItem(key, angular.toJson(value));
+        },
+        get: function(key, _default) {
+            value = $window.localStorage.getItem(key);
+            if(_.isNull(value) || _.isUndefined(value))
+                return _default || null
+
+            return angular.fromJson(value);
+        },
+        remove: function(key) {
+            $window.localStorage.remove(key);
+        }
+    }
+}])
+
+
+.factory('UserSrv', ["$window", "$location", "$http", "$rootScope", "$localStorage", function($window, $location, $http, $rootScope, $localStorage) {
+    setUser = function(user) {
+        $rootScope.user = user;
+        $localStorage.set('user', $rootScope.user);
+    };
+
+    getUser = function() {
+        if (_.isNull($rootScope.user) || _.isUndefined($rootScope.user))
+            $rootScope.user = $localStorage.get('user');
+
+        return $rootScope.user;
+    };
+
+    getAuthToken = function() {
+        if (_.isNull($rootScope.user) || _.isUndefined($rootScope.user))
+            return null
+        return $rootScope.user.auth_token
+    };
+
+    logout = function() {
+        $rootScope.user = null;
+        $localStorage.remove('user');
+    };
+
     googleAuth = {
-        login: function() {
+        getAuthorizedCodeFromGoogle: function() {
             responseType = "code"
             clientId = googleClientId
             redirectUri = $location.absUrl();
@@ -84,7 +168,7 @@ angular.module('cinemair.services', [])
                     + "&state=" + state
                     //+ "&access_type=" + accessType
             console.log(url);
-            window.location.href = url
+            $window.location.href = url;
         },
         loginOrRegisterWithGoogleAccount: function (code) {
             return $http({
@@ -94,21 +178,18 @@ angular.module('cinemair.services', [])
                     code: code,
                     type: "google"
                 }
-            }).success(function(data) {
-                return data;
+            }).success(function(response) {
+                setUser(response);
+                return response;
             });
         }
     };
 
     return {
-        getMovies: getMovies,
-        getSingleMovie: getSingleMovie,
-        getCinemas: getCinemas,
-        getShows: getShows,
-        getMovieShows: getMovieShows,
-        getSingleShow: getSingleShow,
-        getSingleEvent: getSingleEvent,
-        getEvents: getEvents,
+        getUser: getUser,
+        setUser: setUser,
+        getAuthToken: getAuthToken,
+        logout: logout,
         googleAuth: googleAuth
     };
-});
+}]);

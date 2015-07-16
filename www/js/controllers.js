@@ -3,24 +3,32 @@ angular.module('cinemair.controllers', [])
 /******************************************************/
 /* Login Controller
 /******************************************************/
-.controller('LoginCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, $stateParams) {
-    $scope.login = function () {
-        CinemairSrv.googleAuth.login();
+.controller('LoginCtrl', function($scope, $ionicLoading, $ionicBackdrop, UserSrv, $stateParams, $location) {
+    $scope.login = function() {
+        UserSrv.googleAuth.getAuthorizedCodeFromGoogle();
     };
+
+    _goToSchedule = function(){
+        $location.url("/tab/schedule");
+    };
+
+    user = UserSrv.getUser()
+
+    if(!_.isUndefined(user) && !_.isNull(user)){
+        _goToSchedule();
+    }
 
     if ($stateParams.state === "google-login"){
         $ionicBackdrop.retain();
         $ionicLoading.show({content: 'Loading shows'});
 
-        CinemairSrv.googleAuth.loginOrRegisterWithGoogleAccount($stateParams.code).then(function(data){
-            console.log(data);
-
-            window.location.path = "/tab/schedule"
+        code = $stateParams.code
+        UserSrv.googleAuth.loginOrRegisterWithGoogleAccount(code).then(function(response){
+            _goToSchedule()
             $ionicLoading.hide();
             $ionicBackdrop.release();
         });
     }
-
 })
 
 
