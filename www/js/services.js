@@ -15,7 +15,7 @@ angular.module('cinemair.services', [])
     getSingleMovie = function(id) {
         return $http({
             method: 'GET',
-            url: serverURL + '/movies/' + id
+            url: serverURL + '/movies'
         }).success(function(data) {
             movie = data;
         });

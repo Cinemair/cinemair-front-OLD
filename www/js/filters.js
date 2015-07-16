@@ -11,9 +11,26 @@ angular.module('cinemair.filters', [])
         var d = moment(date);
         if (moment().isBefore(d)) {
             return d.fromNow(withoutSuffix || false);
-        }
-        else {
+        } else {
             return d.toNow(withoutSuffix || false);
         }
+    };
+})
+
+.filter('range', function() {
+    return function(input, total) {
+        total = parseInt(total);
+        for (var i = 0; i < total; i++)
+            input.push(i);
+        return input;
+    };
+})
+
+.filter('rangeInvert', function() {
+    return function(input, total) {
+        total = 10 - parseInt(total);
+        for (var i = 0; i < total; i++)
+            input.push(i);
+        return input;
     };
 })

@@ -55,49 +55,24 @@ angular.module('cinemair.controllers', [])
         });
 })
 
-.controller('MovieDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, $q, CinemairSrv) {
+.controller('MovieDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, $q, CinemairSrv, $ionicSlideBoxDelegate) {
     $ionicLoading.show({
         content: 'Loading movies'
     });
-
     var movieId = $stateParams.id;
-
-    var getSingleMoviePromise = CinemairSrv.getSingleMovie(movieId).then(function() {
-
-        <!-- release -->
-        $scope.release = moment(movie.tmdb_info.release_date).format('LL');
-
-        <!-- vote average -->
-        var votesAvg = Math.round(movie.tmdb_info.vote_average);
-        var votesArray = [];
-        for (i = 0; i < votesAvg; i++) {
-            votesArray.push(i);
-        }
-
-        var votesRestArray = [];
-        for (i = 0; i < (10 - votesArray.length); i++) {
-            votesRestArray.push(i);
-        }
-        $scope.votes = votesArray;
-        $scope.votesrest = votesRestArray;
-
-        <!-- countries -->
-        $scope.countries = movie.tmdb_info.production_countries;
-
-        <!-- genres -->
-        $scope.genres = movie.tmdb_info.genres;
-
-        <!-- movie data -->
-        $scope.movie = movie;
-
+    
+    var getMovies = CinemairSrv.getMovies().then(function() {
+        $scope.movies = movies;
     });
 
     var getMovieShowsPromise = CinemairSrv.getMovieShows(movieId).then(function() {
         $scope.shows = singleShows;
     });
 
-    $q.all([getSingleMoviePromise, getMovieShowsPromise]).then(function() {
+    $q.all([getMovies, getMovieShowsPromise]).then(function() {
         $ionicLoading.hide();
+        $ionicSlideBoxDelegate.update();
+        $scope.movieid = movieId - 1;
     })
 })
 
