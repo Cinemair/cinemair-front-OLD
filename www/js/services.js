@@ -70,6 +70,7 @@ angular.module('cinemair.services', [])
 
     getSingleShow = function(id) {
         return $http({
+            headers: _headers(),
             method: 'GET',
             url: serverURL + '/shows/' + id
         }).success(function(data) {
