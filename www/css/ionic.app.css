@@ -7701,7 +7701,8 @@ a.button {
     font-weight: 700; }
 
 .bar .button.button-icon:before {
-  font-size: 1.5rem; }
+  font-size: 1.25rem;
+  color: #b41b0f; }
 
 .login-form {
   flex: 1; }

@@ -36,7 +36,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .bar .button.button-icon {
     &:before {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        color: darken($assertive, 20%);
     }
 }
 .login-form {
