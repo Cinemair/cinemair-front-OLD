@@ -1,7 +1,7 @@
 <ion-view view-title="Schedule">
     <ion-content has-bouncing>
         <div class="list" ng-if="events">
-            <a ng-repeat="event in events" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="tab/schedule/{{event.show}}">
+            <a ng-repeat="event in events" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="tab/event/{{event.show}}">
                 <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.poster_path}}">
                 <h2>{{ event.show_info.movie_info.tmdb_info.original_title }}</h2>
                 <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>

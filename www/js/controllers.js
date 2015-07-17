@@ -3,7 +3,7 @@ angular.module('cinemair.controllers', [])
 /******************************************************/
 /* Login Controller
 /******************************************************/
-.controller('LoginCtrl', function($scope, $ionicLoading, $ionicBackdrop, UserSrv, $stateParams, $location) {
+/*.controller('LoginCtrl', function($scope, $ionicLoading, $ionicBackdrop, UserSrv, $stateParams, $location) {
     $scope.login = function() {
         UserSrv.googleAuth.getAuthorizedCodeFromGoogle();
     };
@@ -29,7 +29,7 @@ angular.module('cinemair.controllers', [])
             $ionicBackdrop.release();
         });
     }
-})
+})*/
 
 
 .controller('ShowsCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
@@ -82,7 +82,7 @@ angular.module('cinemair.controllers', [])
         }
     };
 })
-
+/*
 .controller('MoviesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $scope.logout = function(){
         usersrv.logout();
@@ -158,7 +158,8 @@ angular.module('cinemair.controllers', [])
         }
     };
 })
-
+*/
+/*
 .controller('CinemasCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $scope.logout = function(){
         usersrv.logout();
@@ -175,7 +176,7 @@ angular.module('cinemair.controllers', [])
     });
 })
 
-.controller('ScheduleCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
+.controller('EventsCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $scope.logout = function(){
         usersrv.logout();
     };
@@ -242,4 +243,4 @@ angular.module('cinemair.controllers', [])
             });
         }
     };
-});
+});*/

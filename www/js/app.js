@@ -62,22 +62,22 @@ angular.module('cinemair', [
 
     // Each tab has its own nav history stack:
 
-    .state('tab.schedule', {
-        url: '/schedule',
+    .state('tab.events', {
+        url: '/events',
         cache: false,
         views: {
-            'tab-schedule': {
-                templateUrl: 'templates/tab-schedule.html',
-                controller: 'ScheduleCtrl'
+            'tab-events': {
+                templateUrl: 'templates/tab-events.html',
+                controller: 'EventsCtrl'
             }
         }
     })
-    .state('tab.scheduled', {
-        url: '/schedule/:id',
+    .state('tab.event', {
+        url: '/event/:id',
         views: {
-            'tab-schedule': {
-                templateUrl: 'templates/schedule-detail.html',
-                controller: 'ScheduleDetailCtrl'
+            'tab-events': {
+                templateUrl: 'templates/event-detail.html',
+                controller: 'EventDetailCtrl'
             }
         }
     })
