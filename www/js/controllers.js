@@ -185,9 +185,9 @@ angular.module('cinemair.controllers', [])
         content: 'Loading events'
     });
     CinemairSrv.getEvents().success(function(events) {
+        $scope.events = events;
         $ionicLoading.hide();
         $ionicBackdrop.release();
-        $scope.events = events;
     });
     $scope.deleteEvent = function(event) {
         $ionicLoading.show({

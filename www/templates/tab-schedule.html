@@ -1,14 +1,39 @@
 <ion-view view-title="Schedule">
     <ion-content has-bouncing>
-        <div class="list">
+        <div class="list" ng-if="events">
             <a ng-repeat="event in events" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="tab/schedule/{{event.show}}">
                 <img src="https://image.tmdb.org/t/p/w185{{event.show_info.movie_info.tmdb_info.poster_path}}">
                 <h2>{{ event.show_info.movie_info.tmdb_info.original_title }}</h2>
                 <p>{{ event.show_info.cinema_info.name }} ({{ event.show_info.cinema_info.address }})</p>
                 <p>{{ event.show_info.datetime|fromNow }}</p>
-                <i class="icon ion-android-favorite assertive"
-                   ng-click="$event.preventDefault(); deleteEvent(event);"></i>
+                <i class="icon ion-android-favorite assertive" ng-click="$event.preventDefault(); deleteEvent(event);"></i>
             </a>
+        </div>
+        <div class="list empty-card" ng-if="events.length === 0">
+            <div class="list card">
+                <div class="item item-image">
+                    <img src="http://38.media.tumblr.com/tumblr_lc738lDRh31qe0eclo1_r1_500.gif" />
+                </div>
+                <div class="item item-body">
+                    <h2 class="empty-title assertive">"Every gun makes his own tune"</h2>
+                    <p class="empty-title">Please, <b>{{user.full_name}}</b> favorite some movies to creating your own events calendar!</p>
+                </div>
+                <a class="item item-icon-left item-icon-right" href="tab/movies">
+                    <i class="icon ion-videocamera assertive"></i>
+                    <span>See all movies</span>
+                    <i class="icon icon ion-chevron-right stable icon-movies-fav"></i>
+                </a>
+                <a class="item item-icon-left item-icon-right" href="tab/movies">
+                    <i class="icon ion-location assertive"></i>
+                    <span>See all cinemas</span>
+                    <i class="icon icon ion-chevron-right stable icon-movies-fav"></i>
+                </a>
+                <a class="item item-icon-left item-icon-right" href="tab/dates">
+                    <i class="icon ion-android-calendar assertive"></i>
+                    <span>See all shows</span>
+                    <i class="icon icon ion-chevron-right stable icon-movies-fav"></i>
+                </a>
+            </div>
         </div>
     </ion-content>
 </ion-view>
