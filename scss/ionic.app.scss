@@ -44,7 +44,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 .pane,
 .view {
-    background: url("../img/logo.png") no-repeat center center $dark;
+    background: url("../img/logo-alpha.png") no-repeat center center $dark;
     &.login-view {
         background: url("../img/background.jpg") no-repeat center center;
         background-size: cover;
@@ -114,4 +114,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     span {
         margin-right: .5rem;
     }
+}
+
+.ion-android-star {
+    font-size: 20px;
 }

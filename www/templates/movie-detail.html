@@ -3,21 +3,23 @@
         <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue show-pager="false" active-slide="movieid">
             <ion-slide ng-repeat="movie in movies">
                 <div class="list card">
-                    <div class="item item-icon-left item-icon-right">
+                    <div class="item item-image">
+                        <img src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.backdrop_path}}">
+                    </div>
+                    <div class="item item-divider item-icon-left item-icon-right">
                         <i class="icon ion-quote stable"></i>
                         <h2>{{movie.tmdb_info.original_title}}</h2>
                         <p>{{movie.tmdb_info.tagline}}</p>
                     </div>
-                    <div class="item item-image">
-                        <img src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.backdrop_path}}">
-                    </div>
                     <div class="item item-body">
-                        <span ng-repeat="n in [] | range:movie.tmdb_info.vote_average" class="vote-avg">
-                            <i class="icon ion-android-star energized"></i>
-                        </span>
-                        <span ng-repeat="n in [] | rangeInvert:movie.tmdb_info.vote_average">
-                            <i class="icon ion-android-star-outline energized"></i>
-                        </span>
+                        <div class="vote-avg">
+                            <span ng-repeat="n in [] | range:movie.tmdb_info.vote_average" class="vote-avg">
+                                <i class="icon ion-android-star energized"></i>
+                            </span>
+                            <span ng-repeat="n in [] | rangeInvert:movie.tmdb_info.vote_average">
+                                <i class="icon ion-android-star-outline energized"></i>
+                            </span>
+                        </div>
                         <p>
                             {{movie.tmdb_info.overview}}
                         </p>

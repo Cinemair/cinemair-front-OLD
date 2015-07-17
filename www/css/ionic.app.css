@@ -7707,7 +7707,7 @@ a.button {
   flex: 1; }
 
 .pane, .view {
-  background: url("../img/logo.png") no-repeat center center #212121; }
+  background: url("../img/logo-alpha.png") no-repeat center center #212121; }
   .pane.login-view, .view.login-view {
     background: url("../img/background.jpg") no-repeat center center;
     background-size: cover;
@@ -7766,3 +7766,6 @@ a.button {
   white-space: nowrap; }
   .subdued span {
     margin-right: .5rem; }
+
+.ion-android-star {
+  font-size: 20px; }

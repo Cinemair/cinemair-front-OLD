@@ -14,21 +14,23 @@
             </div>
         </div>
         <div class="list card">
-            <div class="item item-icon-left">
+            <div class="item item-image">
+                <img src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.backdrop_path}}">
+            </div>
+            <div class="item item-divider item-icon-left">
                 <i class="icon ion-quote stable"></i>
                 <h2>{{show.movie_info.tmdb_info.original_title}}</h2>
                 <p>{{show.movie_info.tmdb_info.tagline}}</p>
             </div>
-            <div class="item item-image">
-                <img src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.backdrop_path}}">
-            </div>
             <div class="item item-body">
-                <span ng-repeat="n in [] | range:show.movie_info.tmdb_info.vote_average" class="vote-avg">
-                    <i class="icon ion-android-star energized"></i>
-                </span>
-                <span ng-repeat="n in [] | rangeInvert:show.movie_info.tmdb_info.vote_average">
-                    <i class="icon ion-android-star-outline energized"></i>
-                </span>
+                <div class="vote-avg">
+                    <span ng-repeat="n in [] | range:show.movie_info.tmdb_info.vote_average" class="vote-avg">
+                        <i class="icon ion-android-star energized"></i>
+                    </span>
+                    <span ng-repeat="n in [] | rangeInvert:show.movie_info.tmdb_info.vote_average">
+                        <i class="icon ion-android-star-outline energized"></i>
+                    </span>
+                </div>
                 <p>
                     {{show.movie_info.tmdb_info.overview}}
                 </p>
