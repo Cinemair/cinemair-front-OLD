@@ -43,7 +43,7 @@
                             <h2>Movie Shows</h2>
                             <i class="icon ion-android-calendar stable"></i>
                         </div>
-                        <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
+                        <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/shows/{{show.id}}">
                             <h2>{{show.cinema_info.name}}</h2>
                             <p>{{show.cinema_info.address}}</p>
                             <p>{{show.datetime|momentFormat:'LL'}}</p>

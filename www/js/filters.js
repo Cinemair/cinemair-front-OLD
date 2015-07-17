@@ -1,14 +1,14 @@
 angular.module('cinemair.filters', [])
 
 .filter('momentFormat', function() {
-    return function(date, format) {
-        return moment(date).format(format);
+    return function(datetime, format) {
+        return moment(datetime).format(format);
     };
 })
 
 .filter('fromNow', function() {
-    return function(date, withoutSuffix) {
-        var d = moment(date);
+    return function(datetime, withoutSuffix) {
+        var d = moment(datetime);
         if (moment().isBefore(d)) {
             return d.fromNow(withoutSuffix || false);
         } else {

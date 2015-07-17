@@ -110,21 +110,21 @@ angular.module('cinemair', [
             }
         }
     })
-    .state('tab.dates', {
+    .state('tab.shows', {
         cache: false,
-        url: '/dates',
+        url: '/shows',
         views: {
-            'tab-dates': {
-                templateUrl: 'templates/tab-dates.html',
-                controller: 'DatesCtrl'
+            'tab-shows': {
+                templateUrl: 'templates/tab-shows.html',
+                controller: 'ShowsCtrl'
             }
         }
     })
-    .state('tab.date', {
-        url: '/dates/:id',
+    .state('tab.show', {
+        url: '/shows/:id',
         views: {
-            'tab-dates': {
-                templateUrl: 'templates/date-detail.html',
+            'tab-shows': {
+                templateUrl: 'templates/show-detail.html',
                 controller: 'ScheduleDetailCtrl'
             }
         }

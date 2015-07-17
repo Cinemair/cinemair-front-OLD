@@ -1,11 +1,11 @@
-<ion-view view-title="Schedule">
+<ion-view view-title="Shows">
     <ion-content has-bouncing>
         <div class="list" >
             <div ng-repeat="(key,val) in shows">
                 <div class="item item-divider">
                     {{key}}
                 </div>
-                <a ng-repeat="show in val" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="tab/dates/{{show.id}}">
+                <a ng-repeat="show in val" class="item item-thumbnail-left item-icon-right color-dark" nav-transition="android" href="tab/shows/{{show.id}}">
                     <img src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.poster_path}}">
                     <h2>{{ show.movie_info.tmdb_info.original_title }}</h2>
                     <p>{{ show.cinema_info.name }}</p>

@@ -32,7 +32,7 @@ angular.module('cinemair.controllers', [])
 })
 
 
-.controller('DatesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
+.controller('ShowsCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $scope.logout = function(){
         usersrv.logout();
     };
