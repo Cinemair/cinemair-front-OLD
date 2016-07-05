@@ -53,9 +53,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 .pane,
 .view {
-    background: url("../img/logo-alpha.png") no-repeat center center $dark;
+    background: url("../images/logo-alpha.png") no-repeat center center $dark;
     &.login-view {
-        background: url("../img/background.jpg") no-repeat center center;
+        background: url("../images/background.jpg") no-repeat center center;
         background-size: cover;
         display: flex;
         flex-direction: column;

@@ -9095,10 +9095,10 @@ a.button {
 
 .pane,
 .view {
-  background: url("../img/logo-alpha.png") no-repeat center center #212121; }
+  background: url("../images/logo-alpha.png") no-repeat center center #212121; }
   .pane.login-view,
   .view.login-view {
-    background: url("../img/background.jpg") no-repeat center center;
+    background: url("../images/background.jpg") no-repeat center center;
     background-size: cover;
     display: flex;
     flex-direction: column;

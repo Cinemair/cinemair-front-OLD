@@ -37,6 +37,7 @@ gulp.task('webserver', function() {
     gulp.src('www')
         .pipe(webserver({
             fallback: 'index.html',
+            host: "0.0.0.0",
             port: 8100,
             livereload: {
                 enable: true, // need this set to true to enable livereload
