@@ -108,13 +108,15 @@ angular.module('cinemair.controllers', [])
     $ionicLoading.show({
         content: 'Loading movies'
     });
-    var movieId = $stateParams.id;
 
-    var getMovies = CinemairSrv.getMovies().success(function(movies) {
+    $scope.movieId = $stateParams.id;
+    $scope.movieIndex = $stateParams.index;
+
+    var getMovie = CinemairSrv.getMovies().success(function(movies) {
         $scope.movies = movies;
     });
 
-    var getMovieShowsPromise = CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
+    var getMovieShowsPromise = CinemairSrv.getMovieShows($scope.movieId).success(function(movieShows) {
         $scope.shows = movieShows;
     });
 
@@ -131,7 +133,6 @@ angular.module('cinemair.controllers', [])
     $q.all([getMovies, getMovieShowsPromise]).then(function() {
         $ionicLoading.hide();
         $ionicSlideBoxDelegate.update();
-        $scope.movieid = movieId - 1;
     });
 
     $scope.toggleShow = function(show) {

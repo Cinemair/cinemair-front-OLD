@@ -1,9 +1,9 @@
 <ion-view view-title="">
     <ion-content class="padding">
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue show-pager="false" active-slide="movieid">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue show-pager="false" active-slide="movieIndex">
             <ion-slide ng-repeat="movie in movies">
                 <div class="list card">
-                    <div class="item item-image">
+                    <div class="item item-image" >
                         <img src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.backdrop_path}}">
                     </div>
                     <div class="item item-divider item-icon-left item-icon-right">
@@ -23,6 +23,10 @@
                         <p>
                             {{movie.tmdb_info.overview}}
                         </p>
+                        <a ng-if="movie.tmdb_videos.results[0].key" class="button button-block button-light" ng-href="https://www.youtube.com/watch?v={{movie.tmdb_videos.results[0].key}}&autoplay=1">
+                            <i class="icon ion-closed-captioning"></i>
+                            <span>View trailer</span>
+                        </a>
                         <p>
                             <span class="subdued">
                                 <span class="icon ion-android-calendar"></span>
