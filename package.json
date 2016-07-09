@@ -4,14 +4,15 @@
   "description": "cinemair-front: An Ionic project",
   "devDependencies": {
     "bower": "^1.7.9",
-    "gulp-concat": "^2.6.0",
     "gulp": "^3.9.1",
-    "gulp-rename": "^1.2.2",
     "gulp-clean-css": "^2.0.10",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-util": "^2.2.20",
-    "shelljs": "^0.3.0",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
     "cordova-plugin-device",
