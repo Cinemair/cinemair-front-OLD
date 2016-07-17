@@ -36,10 +36,6 @@ angular.module('cinemair.controllers', [])
 /* User Dates Controller
 /******************************************************/
 .controller('DatesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
-    $scope.logout = function(){
-        UserSrv.logout();
-    };
-
     $ionicBackdrop.retain();
     $ionicLoading.show({content: 'Loading shows'});
 
@@ -85,10 +81,6 @@ angular.module('cinemair.controllers', [])
 /* Movies Controller
 /******************************************************/
 .controller('MoviesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
-    $scope.logout = function(){
-        UserSrv.logout();
-    };
-
     $ionicBackdrop.retain();
     $ionicLoading.show({content: 'Loading movies'});
 
@@ -101,10 +93,6 @@ angular.module('cinemair.controllers', [])
 })
 
 .controller('MovieDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $ionicSlideBoxDelegate, $stateParams, CinemairSrv, UserSrv) {
-    $scope.logout = function(){
-        UserSrv.logout();
-    };
-
     $scope.movieIndex = $stateParams.index;
 
     $ionicBackdrop.retain();
@@ -161,10 +149,6 @@ angular.module('cinemair.controllers', [])
 /* Cinemas Controller
 /******************************************************/
 .controller('CinemasCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
-    $scope.logout = function(){
-        UserSrv.logout();
-    };
-
     $ionicBackdrop.retain();
     $ionicLoading.show({
         content: 'Loading cinemas'
@@ -183,10 +167,6 @@ angular.module('cinemair.controllers', [])
 /* Schedele Controller
 /******************************************************/
 .controller('ScheduleCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
-    $scope.logout = function(){
-        UserSrv.logout();
-    };
-
     $ionicBackdrop.retain();
     $ionicLoading.show({content: 'Loading events'});
 
@@ -210,16 +190,12 @@ angular.module('cinemair.controllers', [])
 })
 
 .controller('ScheduleDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv, UserSrv) {
-    $scope.logout = function(){
-        UserSrv.logout();
-    };
-
     $ionicBackdrop.retain();
     $ionicLoading.show({content: 'Loading movies'});
 
-    var EventID = $stateParams.id;
+    var scheduleId = $stateParams.scheduleId;
 
-    CinemairSrv.getSingleShow(EventID).success(function(show) {
+    CinemairSrv.getSingleShow(scheduleId).success(function(show) {
         $scope.show = show;
 
         $ionicLoading.hide();
@@ -232,7 +208,7 @@ angular.module('cinemair.controllers', [])
         if (show.event === null){
             // Create
             CinemairSrv.createEvent(show.id).then(function() {
-                CinemairSrv.getSingleShow(EventID).success(function(show) {
+                CinemairSrv.getSingleShow(scheduleId).success(function(show) {
                     $scope.show = show;
                     $ionicLoading.hide();
                 });
@@ -241,7 +217,7 @@ angular.module('cinemair.controllers', [])
         else {
             // Delete
             CinemairSrv.deleteEvent(show.event).then(function() {
-                CinemairSrv.getSingleShow(EventID).success(function(show) {
+                CinemairSrv.getSingleShow(scheduleId).success(function(show) {
                     $scope.show = show;
                     $ionicLoading.hide();
                 });

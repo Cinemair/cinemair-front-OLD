@@ -123,7 +123,7 @@ angular.module('cinemair', [
         }
     })
     .state('tab.date', {
-        url: '/dates/:id',
+        url: '/dates/:scheduleId',
         views: {
             'tab-dates': {
                 templateUrl: 'templates/date-detail.html',
