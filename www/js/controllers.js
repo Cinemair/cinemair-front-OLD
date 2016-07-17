@@ -92,33 +92,22 @@ angular.module('cinemair.controllers', [])
     });
 })
 
-.controller('MovieDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $ionicSlideBoxDelegate, $stateParams, CinemairSrv, UserSrv) {
-    $scope.movieIndex = $stateParams.index;
+.controller('MovieDetailCtrl', function($scope, $q, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv, UserSrv) {
+    $scope.movieId = $stateParams.movieId;
+
+    var moviePromise = CinemairSrv.getMovie($scope.movieId).success(function(movie) {
+        $scope.movie = movie;
+    });
+    var showsPromise = CinemairSrv.getMovieShows($scope.movieId).success(function(movieShows) {
+        $scope.shows = movieShows;
+    });
 
     $ionicBackdrop.retain();
     $ionicLoading.show({content: 'Loading movies'});
-
-    CinemairSrv.getMovies().success(function(movies) {
-        $scope.movies = movies;
-        CinemairSrv.getMovieShows($scope.movies[$scope.movieIndex].id).success(function(movieShows) {
-            $scope.shows = movieShows;
-            $ionicSlideBoxDelegate.update();
-
-            $ionicLoading.hide();
-            $ionicBackdrop.release();
-        });
+    $q.all([moviePromise, showsPromise]).then(function() {
+        $ionicLoading.hide();
+        $ionicBackdrop.release();
     });
-
-    $scope.slideHasChanged = function(index) {
-        $ionicLoading.show({
-            content: 'Loading movies'
-        });
-
-        CinemairSrv.getMovieShows($scope.movies[index].id).success(function(movieShows) {
-            $scope.shows = movieShows;
-            $ionicLoading.hide();
-        });
-    }
 
     $scope.toggleShow = function(show) {
         $ionicLoading.show({content: 'Loading shows'});

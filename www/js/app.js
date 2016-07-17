@@ -90,7 +90,7 @@ angular.module('cinemair', [
         }
     })
     .state('tab.movie-detail', {
-        url: '/movies/:index',
+        url: '/movies/:movieId',
         views: {
             'tab-movies': {
                 templateUrl: 'templates/movie-detail.html',

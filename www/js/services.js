@@ -25,6 +25,13 @@ angular.module('cinemair.services', [])
             url: serverURL + '/movies'
         });
     };
+    getMovie = function(id) {
+        return $http({
+            headers: _headers(),
+            method: 'GET',
+            url: serverURL + '/movies/' + id
+        });
+    };
     getMovieShows = function(id) {
         return $http({
             headers: _headers(),
@@ -91,6 +98,7 @@ angular.module('cinemair.services', [])
         getCinemas: getCinemas,
 
         getMovies: getMovies,
+        getMovie: getMovie,
         getMovieShows: getMovieShows,
 
         getShows: getShows,
