@@ -1,6 +1,7 @@
 {
   "name": "Cinemair",
   "short_name": "Cinemair",
+  "description": "A Madrid open air cinema movie finder mobile app",
   "theme_color": "#ef473a",
   "background_color": "#fefefe",
   "display": "fullscreen",
