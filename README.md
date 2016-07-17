@@ -9,14 +9,21 @@
 npm install -g cordova ionic gulp
 ```
 
- - Run npm
+ - Run npm & bower
 
 ```
 npm install
+bower install
 ```
 
 - Execute gulp
 
 ```
 gulp
+```
+
+- Start ionic server
+
+```
+ionic serve
 ```
