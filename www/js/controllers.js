@@ -33,7 +33,7 @@ angular.module('cinemair.controllers', [])
 
 
 /******************************************************/
-/* User Dates Controller
+/* Events Controller
 /******************************************************/
 .controller('DatesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $ionicBackdrop.retain();
@@ -44,7 +44,7 @@ angular.module('cinemair.controllers', [])
         $ionicBackdrop.release();
 
         $scope.shows = _.groupBy(shows, function(show) {
-            return moment(show.datetime).format('Do MMM YYYY');
+            return moment(show.datetime).utc().format('Do MMM YYYY');
         });
     });
 
@@ -56,7 +56,7 @@ angular.module('cinemair.controllers', [])
             CinemairSrv.createEvent(show.id).then(function() {
                 CinemairSrv.getShows().success(function(shows) {
                     $scope.shows = _.groupBy(shows, function(show) {
-                        return moment(show.datetime).format('Do MMM YYYY');
+                        return moment(show.datetime).utc().format('Do MMM YYYY');
                     });
                     $ionicLoading.hide();
                 });
@@ -67,7 +67,7 @@ angular.module('cinemair.controllers', [])
             CinemairSrv.deleteEvent(show.event).then(function() {
                 CinemairSrv.getShows().success(function(shows) {
                     $scope.shows = _.groupBy(shows, function(show) {
-                        return moment(show.datetime).format('Do MMM YYYY');
+                        return moment(show.datetime).utc().format('Do MMM YYYY');
                     });
                     $ionicLoading.hide();
                 });
@@ -153,7 +153,7 @@ angular.module('cinemair.controllers', [])
 
 
 /******************************************************/
-/* Schedele Controller
+/* User Schedele Controller
 /******************************************************/
 .controller('ScheduleCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $ionicBackdrop.retain();
