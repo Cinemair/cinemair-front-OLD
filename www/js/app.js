@@ -1,10 +1,10 @@
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'cinemair' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
+// 'cinemair.services' is found in services.js
+// 'cinemair.controllers' is found in controllers.js
 angular.module('cinemair', [
     'ionic',
     'cinemair.controllers',
@@ -12,23 +12,18 @@ angular.module('cinemair', [
     'cinemair.filters'
 ])
 
-.config(function($ionicConfigProvider) {
-    $ionicConfigProvider.views.maxCache(5);
-    $ionicConfigProvider.views.transition('android');
-    $ionicConfigProvider.spinner.icon('android');
-    $ionicConfigProvider.scrolling.jsScrolling(false);
-})
-
 .run(function($ionicPlatform, $rootScope, UserSrv) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
+
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
-            StatusBar.styleLightContent();
+            StatusBar.styleDefault();
         }
     });
 
@@ -37,7 +32,7 @@ angular.module('cinemair', [
     };
 })
 
-.config(function($stateProvider, $urlRouterProvider, $locationProvider, $provide, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider, $provide, $httpProvider, $compileProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -55,13 +50,14 @@ angular.module('cinemair', [
 
     // setup an abstract state for the tabs directive
     .state('tab', {
-        url: "/tab",
+        url: '/tab',
         abstract: true,
-        templateUrl: "templates/tabs.html"
+        templateUrl: 'templates/tabs.html'
     })
 
     // Each tab has its own nav history stack:
 
+    // SCHEDULER
     .state('tab.schedule', {
         url: '/schedule',
         cache: false,
@@ -72,8 +68,8 @@ angular.module('cinemair', [
             }
         }
     })
-    .state('tab.scheduled', {
-        url: '/schedule/:id',
+    .state('tab.schedule-detail', {
+        url: '/schedule/:scheduleId',
         views: {
             'tab-schedule': {
                 templateUrl: 'templates/schedule-detail.html',
@@ -81,6 +77,8 @@ angular.module('cinemair', [
             }
         }
     })
+
+    // MOVIES
     .state('tab.movies', {
         url: '/movies',
         cache: false,
@@ -91,9 +89,8 @@ angular.module('cinemair', [
             }
         }
     })
-    .state('tab.movie', {
-        url: '/movies/:id/index/:index',
-        cache: false,
+    .state('tab.movie-detail', {
+        url: '/movies/:index',
         views: {
             'tab-movies': {
                 templateUrl: 'templates/movie-detail.html',
@@ -101,7 +98,10 @@ angular.module('cinemair', [
             }
         }
     })
+
+    // CINEMAS
     .state('tab.cinemas', {
+        cache: false,
         url: '/cinemas',
         views: {
             'tab-cinemas': {
@@ -110,6 +110,8 @@ angular.module('cinemair', [
             }
         }
     })
+
+    // DATES
     .state('tab.dates', {
         cache: false,
         url: '/dates',
@@ -130,6 +132,10 @@ angular.module('cinemair', [
         }
     });
 
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/');
+
+    // HTTP provider default headers
     defaultHeaders = {
         "Content-Type": "application/json",
         "Accept-Language": "en"
@@ -161,7 +167,6 @@ angular.module('cinemair', [
         requireBase: false
     });
 
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/');
-
+    // Allow images
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
 });

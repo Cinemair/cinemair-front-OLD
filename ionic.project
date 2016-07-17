@@ -1,12 +1,4 @@
 {
-  "name": "cinemair-front",
-  "app_id": "",
-  "gulpStartupTasks": [
-    "sass",
-    "watch"
-  ],
-  "watchPatterns": [
-    "www/**/*",
-    "!www/lib/**/*"
-  ]
+  "name": "cinemair",
+  "app_id": ""
 }

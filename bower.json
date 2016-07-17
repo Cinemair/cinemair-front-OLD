@@ -1,11 +1,23 @@
 {
-  "name": "cinemair",
-  "private": "true",
+  "name": "Cinemair",
+  "version": "1.0.0",
+  "description": "A Madrid open air cinema movie finder mobile app",
+  "license": "MIT",
+  "author": "Xavier julián Olmos (https://github.com/Xaviju)",
+  "contributors": [
+    "David Barragán Merino (https://github.com/bameda)"
+  ],
+  "homepage": "http://cinemair.es",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cinemair/cinemair-front.git"
+  },
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.1"
+    "ionic": "driftyco/ionic-bower#1.3.1"
   },
   "dependencies": {
-    "lodash": "~3.10.0",
-    "moment": "~2.10.3"
-  }
+    "lodash": "^4.13.1",
+    "moment": "^2.14.1"
+  },
+  "private": "true"
 }

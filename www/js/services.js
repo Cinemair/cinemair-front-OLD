@@ -153,15 +153,13 @@ angular.module('cinemair.services', [])
             redirectUri = $location.absUrl();
             scope = "email profile".replace(" ", "%20");
             state = "google-login";
-            accessType = "offline";
+
             url = "https://accounts.google.com/o/oauth2/auth"
                     + "?response_type=" + responseType
                     + "&client_id=" + clientId
                     + "&redirect_uri=" + redirectUri
                     + "&scope=" + scope
                     + "&state=" + state
-                    //+ "&access_type=" + accessType
-            console.log(url);
             $window.location.href = url;
         },
         loginOrRegisterWithGoogleAccount: function (code) {

@@ -1,5 +1,5 @@
 //! moment.js locale configuration
-//! locale : australian english (en-au)
+//! locale : English (Australia) [en-au]
 
 import moment from '../moment';
 
@@ -14,8 +14,8 @@ export default moment.defineLocale('en-au', {
         LTS : 'h:mm:ss A',
         L : 'DD/MM/YYYY',
         LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY LT',
-        LLLL : 'dddd, D MMMM YYYY LT'
+        LLL : 'D MMMM YYYY h:mm A',
+        LLLL : 'dddd, D MMMM YYYY h:mm A'
     },
     calendar : {
         sameDay : '[Today at] LT',

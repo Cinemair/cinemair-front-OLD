@@ -1,10 +1,10 @@
 <ion-view view-title="">
     <ion-content class="padding">
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue show-pager="false" active-slide="movieIndex">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue show-pager="false" active-slide="movieIndex" ng-if="movies">
             <ion-slide ng-repeat="movie in movies">
                 <div class="list card">
                     <div class="item item-image" >
-                        <img ng-src="https://image.tmdb.org/t/p/w185{{movie.tmdb_info.backdrop_path}}">
+                        <img ng-src="{{ 'https://image.tmdb.org/t/p/w185' + movie.tmdb_info.backdrop_path}}" >
                     </div>
                     <div class="item item-divider item-icon-left item-icon-right">
                         <i class="icon ion-quote stable"></i>

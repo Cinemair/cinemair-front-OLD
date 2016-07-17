@@ -1,5 +1,5 @@
 //! moment.js locale configuration
-//! locale : chuvash (cv)
+//! locale : Chuvash [cv]
 //! author : Anatoly Mironov : https://github.com/mirontoli
 
 import moment from '../moment';
@@ -12,11 +12,11 @@ export default moment.defineLocale('cv', {
     weekdaysMin : 'вр_тн_ыт_юн_кҫ_эр_шм'.split('_'),
     longDateFormat : {
         LT : 'HH:mm',
-        LTS : 'LT:ss',
+        LTS : 'HH:mm:ss',
         L : 'DD-MM-YYYY',
         LL : 'YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ]',
-        LLL : 'YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ], LT',
-        LLLL : 'dddd, YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ], LT'
+        LLL : 'YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ], HH:mm',
+        LLLL : 'dddd, YYYY [ҫулхи] MMMM [уйӑхӗн] D[-мӗшӗ], HH:mm'
     },
     calendar : {
         sameDay: '[Паян] LT [сехетре]',
