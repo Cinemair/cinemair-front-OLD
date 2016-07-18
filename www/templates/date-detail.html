@@ -2,16 +2,15 @@
     <ion-content class="padding">
         <div class="list card">
             <div class="item item-divider item-icon-right">
-                <h2>{{show.cinema_info.name}}</h2>
+                <h2>
+                  <a href="https://maps.google.com/?q={{show.cinema_info.address}},{{show.cinema_info.city}}, {{show.cinema_info.country}}" class="button button-clear button-dark">{{show.cinema_info.name}}</a>
+                </h2>
                 <i class="icon ion-android-favorite"
                    ng-class="{assertive: show.event, stable: !show.event}"
                    ng-click="toggleShow(show)"></i>
-                 <a class="item-note" href="https://maps.google.com/?q={{show.cinema_info.address}},{{show.cinema_info.city}}, {{show.cinema_info.country}}">
-                   <span class="icon icon ion-location"></span>
-                 </a>
-                 <h3>{{show.datetime|momentFormat: 'LL, H:mm'}}h</h3>
             </div>
             <div class="item event-detail-date">
+              <h3>{{show.datetime|momentFormat: 'LL, H:mm'}}h</h3>
             </div>
         </div>
         <div class="list card">
@@ -42,7 +41,7 @@
                 <p>
                     <span class="subdued">
                         <span class="icon ion-android-calendar"></span>
-                        Release: {{show.movie_info.tmdb_info.release_date|momentFormat: 'LL'}}
+                        Release: {{show.movie_info.tmdb_info.release_date|momentFormat: 'gggg'}}
                     </span>
                     <span class="subdued" ng-repeat="country in show.movie_info.tmdb_info.production_countries">
                         <span class="icon ion-location"></span>
