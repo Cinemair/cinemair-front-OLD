@@ -48,7 +48,7 @@
                 <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
                     <h2>{{show.cinema_info.name}}</h2>
                     <p>{{show.cinema_info.address}}</p>
-                    <p>{{show.datetime|momentFormat:'LL'}}</p>
+                    <p>{{show.datetime|momentFormat: 'LL, H:mm'}}h</p>
                     <i class="icon ion-android-favorite"
                        ng-class="{assertive: show.event, stable: !show.event}"
                        ng-click="$event.preventDefault(); toggleShow(show);"></i>
