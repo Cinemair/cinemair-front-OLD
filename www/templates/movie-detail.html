@@ -28,11 +28,11 @@
                 <p>
                     <span class="subdued">
                         <span class="icon ion-android-calendar"></span>
-                        {{movie.tmdb_info.release_date|momentFormat: 'LL'}}
+                        Release: {{movie.tmdb_info.release_date|momentFormat: 'gggg'}}
                     </span>
                     <span class="subdued" ng-repeat="country in movie.tmdb_info.production_countries">
                         <span class="icon ion-location"></span>
-                        {{country.name}}
+                        Country:{{country.name}}
                     </span>
                     <span class="subdued" ng-repeat="genre in movie.tmdb_info.genres">
                         <span class="icon ion-happy-outline">
