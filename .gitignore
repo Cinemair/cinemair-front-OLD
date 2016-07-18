@@ -7,3 +7,4 @@ plugins/
 *.swp
 *.swo
 www/lib/
+www/css/
