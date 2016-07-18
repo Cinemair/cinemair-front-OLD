@@ -21,7 +21,7 @@
                 <p>
                     {{movie.tmdb_info.overview}}
                 </p>
-                <a ng-if="movie.tmdb_videos.results[0].key" class="button button-block button-light" ng-href="https://www.youtube.com/watch?v={{movie.tmdb_videos.results[0].key}}&autoplay=1">
+                <a ng-if="movie.tmdb_videos[0].key" class="button button-block button-light" ng-href="https://www.youtube.com/watch?v={{movie.tmdb_videos[0].key}}&autoplay=1">
                     <i class="icon ion-closed-captioning"></i>
                     <span>View trailer</span>
                 </a>
