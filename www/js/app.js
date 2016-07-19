@@ -169,4 +169,7 @@ angular.module('cinemair', [
 
     // Allow images
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
+
+    // Set momment locales
+    moment.locale('es');
 });
