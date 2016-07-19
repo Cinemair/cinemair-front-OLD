@@ -93,12 +93,12 @@ angular.module('cinemair.controllers', [])
 })
 
 .controller('MovieDetailCtrl', function($scope, $q, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv, UserSrv) {
-    $scope.movieId = $stateParams.movieId;
+    var movieId = $stateParams.movieId;
 
-    var moviePromise = CinemairSrv.getMovie($scope.movieId).success(function(movie) {
+    var moviePromise = CinemairSrv.getMovie(movieId).success(function(movie) {
         $scope.movie = movie;
     });
-    var showsPromise = CinemairSrv.getMovieShows($scope.movieId).success(function(movieShows) {
+    var showsPromise = CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
         $scope.shows = movieShows;
     });
 
