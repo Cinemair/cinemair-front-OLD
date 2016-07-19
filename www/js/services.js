@@ -39,6 +39,7 @@ angular.module('cinemair.services', [])
             url: serverURL + '/movies/' + id + '/shows'
         });
     };
+
     // CINEMAS
     getCinemas = function() {
         return $http({
@@ -71,7 +72,7 @@ angular.module('cinemair.services', [])
         });
     };
 
-    getSingleShow = function(id) {
+    getShow = function(id) {
         return $http({
             headers: _headers(),
             method: 'GET',
@@ -79,31 +80,30 @@ angular.module('cinemair.services', [])
         });
     };
 
-    // EVENTS
-    getEvents = function() {
+    // FAVORITES
+    getFavorites = function() {
         return $http({
             headers: _headers(),
             method: 'GET',
-            url: serverURL + '/events'
+            url: serverURL + '/favorites'
         });
     };
-
-    createEvent = function(showId) {
+    createFavorite = function(showId) {
         return $http({
             headers: _headers(),
             method: 'POST',
-            url: serverURL + '/events',
+            url: serverURL + '/favorites',
             data: {
                 show: showId,
                 user: $rootScope.user.id
             }
         });
     };
-    deleteEvent = function (eventId) {
+    deleteFavorite = function (favoriteId) {
         return $http({
             headers: _headers(),
             method: 'DELETE',
-            url: serverURL + '/events/' + eventId,
+            url: serverURL + '/favorites/' + favoriteId,
         });
     };
 
@@ -118,13 +118,14 @@ angular.module('cinemair.services', [])
         getMovieShows: getMovieShows,
 
         getShows: getShows,
-        getSingleShow: getSingleShow,
+        getShow: getShow,
 
-        getEvents: getEvents,
-        createEvent: createEvent,
-        deleteEvent: deleteEvent
+        getFavorites: getFavorites,
+        createFavorite: createFavorite,
+        deleteFavorite: deleteFavorite
     };
 }])
+
 
 .factory('$localStorage', ['$window', function($window) {
     return {

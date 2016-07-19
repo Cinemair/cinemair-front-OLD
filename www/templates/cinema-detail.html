@@ -1,4 +1,4 @@
-<ion-view view-title="">
+<ion-view view-title="{{cinema.name}}">
     <ion-content class="padding">
         <div class="list card">
           <div class="item">
@@ -34,17 +34,13 @@
                     <h2>Pases</h2>
                     <i class="icon ion-android-calendar stable"></i>
                 </div>
-                <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
-                    <h2>{{show.cinema_info.name}}</h2>
-                    <p>{{show.cinema_info.address}}</p>
-                    <p>
-                      {{show.datetime|momentFormat: 'LL, H:mm'}}h
-                      <small ng-if="show.cinema_info.approximate_price != 0">({{show.cinema_info.approximate_price | number:1}}€)</small>
-                      <small ng-if="show.cinema_info.approximate_price == 0">(Entrada gratuita)</small>
-                    </p>
+                <a class="item item-thumbnail-left item-icon-right" ng-repeat="show in shows" ng-href="tab/shows/{{show.id}}">
+                    <img ng-src="https://image.tmdb.org/t/p/w185{{show.movie_info.tmdb_info.poster_path}}">
+                    <h2>{{show.movie_info.tmdb_info.title}}</h2>
+                    <p>{{show.datetime|momentFormat: 'LL, H:mm'}}h</p>
                     <i class="icon ion-android-favorite"
-                       ng-class="{assertive: show.event, stable: !show.event}"
-                       ng-click="$event.preventDefault(); toggleShow(show);"></i>
+                       ng-class="{assertive: show.favorite, stable: !show.favorite}"
+                       ng-click="$event.preventDefault(); toggleFavorite(show);"></i>
                 </a>
             </div>
         </div>

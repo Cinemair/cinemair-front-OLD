@@ -1,20 +1,12 @@
-<!--
-  The nav bar that will be updated as we navigate between views.
--->
 <ion-header-bar class="bar bar-header bar-assertive">
     <h1 class="title">Cinemair</h1>
     <a class="button button-icon icon ion-android-exit" ng-click="logout()"></a>
 </ion-header-bar>
 
-<!--
-Create tabs with an icon and label, using the tabs-positive style.
-Each tab's child <ion-nav-view> directive will have its own
-navigation history that also transitions its views in and out.
--->
 <ion-tabs class="tabs-striped tabs-top tabs-icon-top tabs-background-assertive tabs-color-light">
-    <!-- Schedule Tab -->
-    <ion-tab title="Favoritos" icon="ion-android-favorite" href="tab/schedule">
-        <ion-nav-view name="tab-schedule"></ion-nav-view>
+    <!-- Favorites Tab -->
+    <ion-tab title="Favoritos" icon="ion-android-favorite" href="tab/favorites">
+        <ion-nav-view name="tab-favorites"></ion-nav-view>
     </ion-tab>
     <!-- Movies Tab -->
     <ion-tab title="Películas" icon="ion-videocamera" href="tab/movies">
@@ -24,9 +16,8 @@ navigation history that also transitions its views in and out.
     <ion-tab title="Cines" icon="ion-location" href="tab/cinemas">
         <ion-nav-view name="tab-cinemas"></ion-nav-view>
     </ion-tab>
-    <!-- Cinemas Tab -->
-    <ion-tab title="Calendario" icon="ion-android-calendar" href="tab/dates">
-        <ion-nav-view name="tab-dates"></ion-nav-view>
+    <!-- Shows Tab -->
+    <ion-tab title="Calendario" icon="ion-android-calendar" href="tab/shows">
+        <ion-nav-view name="tab-shows"></ion-nav-view>
     </ion-tab>
-
 </ion-tabs>

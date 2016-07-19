@@ -57,23 +57,23 @@ angular.module('cinemair', [
 
     // Each tab has its own nav history stack:
 
-    // SCHEDULER
-    .state('tab.schedule', {
-        url: '/schedule',
+    // FAVORITES
+    .state('tab.favorites', {
+        url: '/favorites',
         cache: false,
         views: {
-            'tab-schedule': {
-                templateUrl: 'templates/tab-schedule.html',
-                controller: 'ScheduleCtrl'
+            'tab-favorites': {
+                templateUrl: 'templates/tab-favorites.html',
+                controller: 'FavoritesCtrl'
             }
         }
     })
-    .state('tab.schedule-detail', {
-        url: '/schedule/:scheduleId',
+    .state('tab.favorite-detail', {
+        url: '/favorites/:showId',
         views: {
-            'tab-schedule': {
-                templateUrl: 'templates/schedule-detail.html',
-                controller: 'ScheduleDetailCtrl'
+            'tab-favorites': {
+                templateUrl: 'templates/show-detail.html',
+                controller: 'ShowDetailCtrl'
             }
         }
     })
@@ -111,7 +111,6 @@ angular.module('cinemair', [
         }
     })
 
-    // CINEMAS
     .state('tab.cinema-details', {
         cache: false,
         url: '/cinemas/:cinemaId',
@@ -123,23 +122,23 @@ angular.module('cinemair', [
         }
     })
 
-    // DATES
-    .state('tab.dates', {
+    // SHOWS
+    .state('tab.shows', {
         cache: false,
-        url: '/dates',
+        url: '/shows',
         views: {
-            'tab-dates': {
-                templateUrl: 'templates/tab-dates.html',
-                controller: 'DatesCtrl'
+            'tab-shows': {
+                templateUrl: 'templates/tab-shows.html',
+                controller: 'ShowsCtrl'
             }
         }
     })
-    .state('tab.date', {
-        url: '/dates/:scheduleId',
+    .state('tab.show-detail', {
+        url: '/shows/:showId',
         views: {
-            'tab-dates': {
-                templateUrl: 'templates/date-detail.html',
-                controller: 'ScheduleDetailCtrl'
+            'tab-shows': {
+                templateUrl: 'templates/show-detail.html',
+                controller: 'ShowDetailCtrl'
             }
         }
     });

@@ -8,23 +8,23 @@ angular.module('cinemair.controllers', [])
         UserSrv.googleAuth.getAuthorizedCodeFromGoogle();
     };
 
-    _goToSchedule = function(){
-        $location.url("/tab/schedule");
+    _goToFavorites = function(){
+        $location.url("/tab/favorites");
     };
 
     user = UserSrv.getUser();
 
     if(!_.isUndefined(user) && !_.isNull(user)){
-        _goToSchedule();
+        _goToFavorites();
     }
 
     if ($stateParams.state === "google-login"){
         $ionicBackdrop.retain();
-        $ionicLoading.show({content: 'Loading shows'});
+        $ionicLoading.show({content: 'Loading...'});
 
         code = $stateParams.code;
         UserSrv.googleAuth.loginOrRegisterWithGoogleAccount(code).then(function(){
-            _goToSchedule();
+            _goToFavorites();
             $ionicLoading.hide();
             $ionicBackdrop.release();
         });
@@ -33,9 +33,9 @@ angular.module('cinemair.controllers', [])
 
 
 /******************************************************/
-/* Events Controller
+/* Shows Controller
 /******************************************************/
-.controller('DatesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
+.controller('ShowsCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
     $ionicBackdrop.retain();
     $ionicLoading.show({content: 'Loading shows'});
 
@@ -48,12 +48,12 @@ angular.module('cinemair.controllers', [])
         });
     });
 
-    $scope.toggleShow = function(show) {
+    $scope.toggleFavorite = function(show) {
         $ionicLoading.show({content: 'Loading shows'});
 
-        if (show.event === null){
+        if (show.favorite === null){
             // Create
-            CinemairSrv.createEvent(show.id).then(function() {
+            CinemairSrv.createFavorite(show.id).then(function() {
                 CinemairSrv.getShows().success(function(shows) {
                     $scope.shows = _.groupBy(shows, function(show) {
                         return moment(show.datetime).utc().format('D MMM YYYY');
@@ -64,11 +64,48 @@ angular.module('cinemair.controllers', [])
         }
         else {
             // Delete
-            CinemairSrv.deleteEvent(show.event).then(function() {
+            CinemairSrv.deleteFavorite(show.favorite).then(function() {
                 CinemairSrv.getShows().success(function(shows) {
                     $scope.shows = _.groupBy(shows, function(show) {
                         return moment(show.datetime).utc().format('D MMM YYYY');
                     });
+                    $ionicLoading.hide();
+                });
+            });
+        }
+    };
+})
+
+.controller('ShowDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv, UserSrv) {
+    $ionicBackdrop.retain();
+    $ionicLoading.show({content: 'Loading movies'});
+
+    var showId = $stateParams.showId;
+
+    CinemairSrv.getShow(showId).success(function(show) {
+        $scope.show = show;
+
+        $ionicLoading.hide();
+        $ionicBackdrop.release();
+    });
+
+    $scope.toggleFavorite = function(show) {
+        $ionicLoading.show({content: 'Loading show'});
+
+        if (show.favorite === null){
+            // Create
+            CinemairSrv.createFavorite(show.id).then(function() {
+                CinemairSrv.getShow(showId).success(function(show) {
+                    $scope.show = show;
+                    $ionicLoading.hide();
+                });
+            });
+        }
+        else {
+            // Delete
+            CinemairSrv.deleteFavorite(show.favorite).then(function() {
+                CinemairSrv.getShow(showId).success(function(show) {
+                    $scope.show = show;
                     $ionicLoading.hide();
                 });
             });
@@ -109,13 +146,16 @@ angular.module('cinemair.controllers', [])
         $ionicBackdrop.release();
     });
 
-    $scope.toggleShow = function(show) {
+    $scope.toggleFavorite = function(show) {
+        console.log("caca");
         $ionicLoading.show({content: 'Loading shows'});
 
-        if (show.event === null){
+        if (show.favorite === null){
             // Create
-            CinemairSrv.createEvent(show.id).then(function() {
+            CinemairSrv.createFavorite(show.id).then(function() {
+                console.log("caca1");
                 CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
+                    console.log("caca2");
                     $scope.shows = movieShows;
                     $ionicLoading.hide();
                 });
@@ -123,7 +163,7 @@ angular.module('cinemair.controllers', [])
         }
         else {
             // Delete
-            CinemairSrv.deleteEvent(show.event).then(function() {
+            CinemairSrv.deleteFavorite(show.favorite).then(function() {
                 CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
                     $scope.shows = movieShows;
                     $ionicLoading.hide();
@@ -131,51 +171,6 @@ angular.module('cinemair.controllers', [])
             });
         }
     };
-})
-
-.controller('CinemaDetailCtrl', function($scope, $q, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv) {
-    var cinemaId = $stateParams.cinemaId;
-
-    var cinemaPromise = CinemairSrv.getCinema(cinemaId).success(function(cinema) {
-        $scope.cinema = cinema;
-        cinemaAddress = cinema.address.replace(/\s+/g, '+');
-        $scope.mapAddress = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBm61TCdehUdkRlx3UVVSLrEgCmGjtwnCM&q=' + cinemaAddress+ ',' + cinema.city;
-    });
-    var cinemaShowsPromise = CinemairSrv.getCinemaShows(cinemaId).success(function(cinemaShows) {
-        $scope.cinemaShows = cinemaShows;
-    });
-
-    $ionicBackdrop.retain();
-    $ionicLoading.show({content: 'Loading cinema'});
-
-    $q.all([cinemaPromise, cinemaShowsPromise]).then(function() {
-        $ionicLoading.hide();
-        $ionicBackdrop.release();
-    });
-
-
-    // $scope.toggleShow = function(show) {
-    //     $ionicLoading.show({content: 'Loading shows'});
-    //
-    //     if (show.event === null){
-    //         // Create
-    //         CinemairSrv.createEvent(show.id).then(function() {
-    //             CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
-    //                 $scope.shows = movieShows;
-    //                 $ionicLoading.hide();
-    //             });
-    //         });
-    //     }
-    //     else {
-    //         // Delete
-    //         CinemairSrv.deleteEvent(show.event).then(function() {
-    //             CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
-    //                 $scope.shows = movieShows;
-    //                 $ionicLoading.hide();
-    //             });
-    //         });
-    //     }
-    // };
 })
 
 
@@ -196,66 +191,75 @@ angular.module('cinemair.controllers', [])
     });
 })
 
+.controller('CinemaDetailCtrl', function($scope, $q, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv) {
+    var cinemaId = $stateParams.cinemaId;
 
-/******************************************************/
-/* User Schedele Controller
-/******************************************************/
-.controller('ScheduleCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
+    var cinemaPromise = CinemairSrv.getCinema(cinemaId).success(function(cinema) {
+        $scope.cinema = cinema;
+
+        cinemaAddress = cinema.address.replace(/\s+/g, '+');
+        $scope.mapAddress = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBm61TCdehUdkRlx3UVVSLrEgCmGjtwnCM&q=' + cinemaAddress+ ',' + cinema.city;
+    });
+    var cinemaShowsPromise = CinemairSrv.getCinemaShows(cinemaId).success(function(cinemaShows) {
+        $scope.shows = cinemaShows;
+    });
+
     $ionicBackdrop.retain();
-    $ionicLoading.show({content: 'Loading events'});
+    $ionicLoading.show({content: 'Loading cinema'});
 
-    CinemairSrv.getEvents().success(function(events) {
-        $scope.events = events;
-
+    $q.all([cinemaPromise, cinemaShowsPromise]).then(function() {
         $ionicLoading.hide();
         $ionicBackdrop.release();
     });
-    $scope.deleteEvent = function(event) {
+
+    $scope.toggleFavorite = function(show) {
         $ionicLoading.show({content: 'Loading shows'});
 
-        // Delete
-        CinemairSrv.deleteEvent(event.id).then(function() {
-            CinemairSrv.getEvents().success(function(events) {
-                $scope.events = events;
-                $ionicLoading.hide();
-            });
-        });
-    };
-})
-
-.controller('ScheduleDetailCtrl', function($scope, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv, UserSrv) {
-    $ionicBackdrop.retain();
-    $ionicLoading.show({content: 'Loading movies'});
-
-    var scheduleId = $stateParams.scheduleId;
-
-    CinemairSrv.getSingleShow(scheduleId).success(function(show) {
-        $scope.show = show;
-
-        $ionicLoading.hide();
-        $ionicBackdrop.release();
-    });
-
-    $scope.toggleShow = function(show) {
-        $ionicLoading.show({content: 'Loading movies'});
-
-        if (show.event === null){
+        if (show.favorite === null){
             // Create
-            CinemairSrv.createEvent(show.id).then(function() {
-                CinemairSrv.getSingleShow(scheduleId).success(function(show) {
-                    $scope.show = show;
+            CinemairSrv.createFavorite(show.id).then(function() {
+                CinemairSrv.getCinemaShows(cinemaId).success(function(cinemaShows) {
+                    $scope.shows = cinemaShows;
                     $ionicLoading.hide();
                 });
             });
         }
         else {
             // Delete
-            CinemairSrv.deleteEvent(show.event).then(function() {
-                CinemairSrv.getSingleShow(scheduleId).success(function(show) {
-                    $scope.show = show;
+            CinemairSrv.deleteFavorite(show.favorite).then(function() {
+                CinemairSrv.getCinemaShows(cinemaId).success(function(cinemaShows) {
+                    $scope.shows = cinemaShows;
                     $ionicLoading.hide();
                 });
             });
         }
     };
-});
+})
+
+
+/******************************************************/
+/* Favorites Controller
+/******************************************************/
+.controller('FavoritesCtrl', function($scope, $ionicLoading, $ionicBackdrop, CinemairSrv, UserSrv) {
+    $ionicBackdrop.retain();
+    $ionicLoading.show({content: 'Loading favorites'});
+
+    CinemairSrv.getFavorites().success(function(favorites) {
+        $scope.favorites = favorites;
+
+        $ionicLoading.hide();
+        $ionicBackdrop.release();
+    });
+
+    $scope.deleteFavorite = function(favorite) {
+        $ionicLoading.show({content: 'Loading shows'});
+
+        // Delete
+        CinemairSrv.deleteFavorite(favorite.id).then(function() {
+            CinemairSrv.getFavorites().success(function(favorites) {
+                $scope.favorites = favorites;
+                $ionicLoading.hide();
+            });
+        });
+    };
+})

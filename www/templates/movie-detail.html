@@ -1,4 +1,4 @@
-<ion-view view-title="">
+<ion-view view-title="{{movie.tmdb_info.title}}">
     <ion-content class="padding">
         <div class="list card">
             <div class="item item-image" >
@@ -6,7 +6,7 @@
             </div>
             <div class="item item-divider item-icon-left item-icon-right">
                 <i class="icon ion-quote stable"></i>
-                <h2>{{movie.tmdb_info.original_title}}</h2>
+                <h2>{{movie.tmdb_info.title}}</h2>
                 <p>{{movie.tmdb_info.tagline}}</p>
             </div>
             <div class="item item-body">
@@ -45,7 +45,7 @@
                     <h2>Pases</h2>
                     <i class="icon ion-android-calendar stable"></i>
                 </div>
-                <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
+                <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/shows/{{show.id}}">
                     <h2>{{show.cinema_info.name}}</h2>
                     <p>{{show.cinema_info.address}}</p>
                     <p>
@@ -54,8 +54,8 @@
                       <small ng-if="show.cinema_info.approximate_price == 0">(Entrada gratuita)</small>
                     </p>
                     <i class="icon ion-android-favorite"
-                       ng-class="{assertive: show.event, stable: !show.event}"
-                       ng-click="$event.preventDefault(); toggleShow(show);"></i>
+                       ng-class="{assertive: show.favorite, stable: !show.favorite}"
+                       ng-click="$event.preventDefault(); toggleFavorite(show);"></i>
                 </a>
             </div>
         </div>
