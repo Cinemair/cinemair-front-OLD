@@ -111,6 +111,18 @@ angular.module('cinemair', [
         }
     })
 
+    // CINEMAS
+    .state('tab.cinema-details', {
+        cache: false,
+        url: '/cinemas/:cinemaId',
+        views: {
+            'tab-cinemas': {
+                templateUrl: 'templates/cinema-detail.html',
+                controller: 'CinemaDetailCtrl'
+            }
+        }
+    })
+
     // DATES
     .state('tab.dates', {
         cache: false,

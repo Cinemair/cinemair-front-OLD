@@ -17,6 +17,12 @@ angular.module('cinemair.filters', [])
     };
 })
 
+.filter('trusted', ['$sce', function ($sce) {
+    return function(url) {
+        return $sce.trustAsResourceUrl(url);
+    };
+}])
+
 .filter('range', function() {
     return function(input, total) {
         total = parseInt(total);

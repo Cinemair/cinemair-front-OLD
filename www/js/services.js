@@ -1,5 +1,5 @@
 var serverURL = 'http://127.0.0.1:8000/api/v1';
-var googleClientId = "661976506904-t5hdjfsvggji8vt9k2jqfk1bs2st3c23.apps.googleusercontent.com"
+var googleClientId = "661976506904-t5hdjfsvggji8vt9k2jqfk1bs2st3c23.apps.googleusercontent.com";
 
 angular.module('cinemair.services', [])
 
@@ -45,6 +45,20 @@ angular.module('cinemair.services', [])
             headers: _headers(),
             method: 'GET',
             url: serverURL + '/cinemas'
+        });
+    };
+    getCinema = function(id) {
+        return $http({
+            headers: _headers(),
+            method: 'GET',
+            url: serverURL + '/cinemas/' + id
+        });
+    };
+    getCinemaShows = function(id) {
+        return $http({
+            headers: _headers(),
+            method: 'GET',
+            url: serverURL + '/cinemas/' + id + '/shows'
         });
     };
 
@@ -96,6 +110,8 @@ angular.module('cinemair.services', [])
 
     return {
         getCinemas: getCinemas,
+        getCinema: getCinema,
+        getCinemaShows: getCinemaShows,
 
         getMovies: getMovies,
         getMovie: getMovie,
@@ -118,14 +134,14 @@ angular.module('cinemair.services', [])
         get: function(key, _default) {
             value = $window.localStorage.getItem(key);
             if(_.isNull(value) || _.isUndefined(value))
-                return _default || null
+                return _default || null;
 
             return angular.fromJson(value);
         },
         remove: function(key) {
             $window.localStorage.removeItem(key);
         }
-    }
+    };
 }])
 
 
@@ -144,8 +160,8 @@ angular.module('cinemair.services', [])
 
     getAuthToken = function() {
         if (_.isNull($rootScope.user) || _.isUndefined($rootScope.user))
-            return null
-        return $rootScope.user.auth_token
+            return null;
+        return $rootScope.user.auth_token;
     };
 
     logout = function() {
@@ -156,18 +172,13 @@ angular.module('cinemair.services', [])
 
     googleAuth = {
         getAuthorizedCodeFromGoogle: function() {
-            responseType = "code"
-            clientId = googleClientId
+            responseType = "code";
+            clientId = googleClientId;
             redirectUri = $location.absUrl();
             scope = "email profile".replace(" ", "%20");
             state = "google-login";
 
-            url = "https://accounts.google.com/o/oauth2/auth"
-                    + "?response_type=" + responseType
-                    + "&client_id=" + clientId
-                    + "&redirect_uri=" + redirectUri
-                    + "&scope=" + scope
-                    + "&state=" + state
+            url = "https://accounts.google.com/o/oauth2/auth"+ "?response_type=" + responseType + "&client_id=" + clientId + "&redirect_uri=" + redirectUri + "&scope=" + scope + "&state=" + state;
             $window.location.href = url;
         },
         loginOrRegisterWithGoogleAccount: function (code) {

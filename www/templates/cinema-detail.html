@@ -1,0 +1,52 @@
+<ion-view view-title="">
+    <ion-content class="padding">
+        <div class="list card">
+          <div class="item">
+            <h2>{{cinema.name}}</h2>
+            <p>{{cinema.address}}</p>
+          </div>
+            <div class="item item-image" >
+              <iframe width="100%" height="180" frameborder="0" style="border:0" src="{{mapAddress | trusted}}"></iframe>
+            </div>
+            <div class="item item-body">
+              <div class="list">
+                <a class="item item-icon-left" href="{{mapAddress}}">
+                  <i class="icon ion-location stable"></i>
+                  Localización
+                  <span class="item-note">
+                  {{cinema.address}}
+                  </span>
+                </a>
+                <div class="item item-icon-left">
+                  <i class="icon ion-social-euro stable"></i>
+                  Precio aproximado
+                  <span class="item-note" ng-if="cinema.approximate_price != 0">
+                  {{cinema.approximate_price}}
+                  </span>
+                  <span class="item-note" ng-if="cinema.approximate_price == 0">
+                  Entrada gratuita
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="list">
+                <div class="item item-divider item-icon-left">
+                    <h2>Pases</h2>
+                    <i class="icon ion-android-calendar stable"></i>
+                </div>
+                <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
+                    <h2>{{show.cinema_info.name}}</h2>
+                    <p>{{show.cinema_info.address}}</p>
+                    <p>
+                      {{show.datetime|momentFormat: 'LL, H:mm'}}h
+                      <small ng-if="show.cinema_info.approximate_price != 0">({{show.cinema_info.approximate_price | number:1}}€)</small>
+                      <small ng-if="show.cinema_info.approximate_price == 0">(Entrada gratuita)</small>
+                    </p>
+                    <i class="icon ion-android-favorite"
+                       ng-class="{assertive: show.event, stable: !show.event}"
+                       ng-click="$event.preventDefault(); toggleShow(show);"></i>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

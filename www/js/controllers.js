@@ -12,7 +12,7 @@ angular.module('cinemair.controllers', [])
         $location.url("/tab/schedule");
     };
 
-    user = UserSrv.getUser()
+    user = UserSrv.getUser();
 
     if(!_.isUndefined(user) && !_.isNull(user)){
         _goToSchedule();
@@ -22,9 +22,9 @@ angular.module('cinemair.controllers', [])
         $ionicBackdrop.retain();
         $ionicLoading.show({content: 'Loading shows'});
 
-        code = $stateParams.code
+        code = $stateParams.code;
         UserSrv.googleAuth.loginOrRegisterWithGoogleAccount(code).then(function(){
-            _goToSchedule()
+            _goToSchedule();
             $ionicLoading.hide();
             $ionicBackdrop.release();
         });
@@ -131,6 +131,51 @@ angular.module('cinemair.controllers', [])
             });
         }
     };
+})
+
+.controller('CinemaDetailCtrl', function($scope, $q, $ionicLoading, $ionicBackdrop, $stateParams, CinemairSrv) {
+    var cinemaId = $stateParams.cinemaId;
+
+    var cinemaPromise = CinemairSrv.getCinema(cinemaId).success(function(cinema) {
+        $scope.cinema = cinema;
+        cinemaAddress = cinema.address.replace(/\s+/g, '+');
+        $scope.mapAddress = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBm61TCdehUdkRlx3UVVSLrEgCmGjtwnCM&q=' + cinemaAddress+ ',' + cinema.city;
+    });
+    var cinemaShowsPromise = CinemairSrv.getCinemaShows(cinemaId).success(function(cinemaShows) {
+        $scope.cinemaShows = cinemaShows;
+    });
+
+    $ionicBackdrop.retain();
+    $ionicLoading.show({content: 'Loading cinema'});
+
+    $q.all([cinemaPromise, cinemaShowsPromise]).then(function() {
+        $ionicLoading.hide();
+        $ionicBackdrop.release();
+    });
+
+
+    // $scope.toggleShow = function(show) {
+    //     $ionicLoading.show({content: 'Loading shows'});
+    //
+    //     if (show.event === null){
+    //         // Create
+    //         CinemairSrv.createEvent(show.id).then(function() {
+    //             CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
+    //                 $scope.shows = movieShows;
+    //                 $ionicLoading.hide();
+    //             });
+    //         });
+    //     }
+    //     else {
+    //         // Delete
+    //         CinemairSrv.deleteEvent(show.event).then(function() {
+    //             CinemairSrv.getMovieShows(movieId).success(function(movieShows) {
+    //                 $scope.shows = movieShows;
+    //                 $ionicLoading.hide();
+    //             });
+    //         });
+    //     }
+    // };
 })
 
 
