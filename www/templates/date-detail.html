@@ -41,15 +41,15 @@
                 <p>
                     <span class="subdued">
                         <span class="icon ion-android-calendar"></span>
-                        Release: {{show.movie_info.tmdb_info.release_date|momentFormat: 'gggg'}}
+                        Estreno: {{show.movie_info.tmdb_info.release_date|momentFormat: 'gggg'}}
                     </span>
                     <span class="subdued" ng-repeat="country in show.movie_info.tmdb_info.production_countries">
                         <span class="icon ion-location"></span>
-                        Country: {{country.name}}
+                        País: {{country.name}}
                     </span>
                     <span class="subdued" ng-repeat="genre in show.movie_info.tmdb_info.genres">
-                        <span class="icon ion-happy-outline">
-                        </span>{{genre.name}}
+                        <span class="icon ion-happy-outline"></span>
+                        {{genre.name}}
                     </span>
                 </p>
             </div>

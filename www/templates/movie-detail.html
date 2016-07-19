@@ -23,16 +23,16 @@
                 </p>
                 <a ng-if="movie.tmdb_videos[0].key" class="button button-block button-light" ng-href="https://www.youtube.com/watch?v={{movie.tmdb_videos[0].key}}&autoplay=1">
                     <i class="icon ion-closed-captioning"></i>
-                    <span>View trailer</span>
+                    <span>Ver trailer</span>
                 </a>
                 <p>
                     <span class="subdued">
                         <span class="icon ion-android-calendar"></span>
-                        Release: {{movie.tmdb_info.release_date|momentFormat: 'gggg'}}
+                        Estreno: {{movie.tmdb_info.release_date|momentFormat: 'gggg'}}
                     </span>
                     <span class="subdued" ng-repeat="country in movie.tmdb_info.production_countries">
                         <span class="icon ion-location"></span>
-                        Country:{{country.name}}
+                        País:{{country.name}}
                     </span>
                     <span class="subdued" ng-repeat="genre in movie.tmdb_info.genres">
                         <span class="icon ion-happy-outline">
@@ -42,7 +42,7 @@
             </div>
             <div class="list">
                 <div class="item item-divider item-icon-left">
-                    <h2>Movie Shows</h2>
+                    <h2>Pases</h2>
                     <i class="icon ion-android-calendar stable"></i>
                 </div>
                 <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
