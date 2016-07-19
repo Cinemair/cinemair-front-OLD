@@ -44,7 +44,7 @@ angular.module('cinemair.controllers', [])
         $ionicBackdrop.release();
 
         $scope.shows = _.groupBy(shows, function(show) {
-            return moment(show.datetime).utc().format('Do MMM YYYY');
+            return moment(show.datetime).utc().format('D MMM YYYY');
         });
     });
 
@@ -56,7 +56,7 @@ angular.module('cinemair.controllers', [])
             CinemairSrv.createEvent(show.id).then(function() {
                 CinemairSrv.getShows().success(function(shows) {
                     $scope.shows = _.groupBy(shows, function(show) {
-                        return moment(show.datetime).utc().format('Do MMM YYYY');
+                        return moment(show.datetime).utc().format('D MMM YYYY');
                     });
                     $ionicLoading.hide();
                 });
@@ -67,7 +67,7 @@ angular.module('cinemair.controllers', [])
             CinemairSrv.deleteEvent(show.event).then(function() {
                 CinemairSrv.getShows().success(function(shows) {
                     $scope.shows = _.groupBy(shows, function(show) {
-                        return moment(show.datetime).utc().format('Do MMM YYYY');
+                        return moment(show.datetime).utc().format('D MMM YYYY');
                     });
                     $ionicLoading.hide();
                 });
