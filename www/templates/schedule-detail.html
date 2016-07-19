@@ -10,7 +10,9 @@
                    ng-click="toggleShow(show)"></i>
             </div>
             <div class="item event-detail-date">
-                <h3>{{show.datetime|momentFormat: 'LL, H:mm'}}h</h3>
+              <span>{{show.datetime|momentFormat: 'LL, H:mm'}}h</span>
+              <span ng-if="show.cinema_info.approximate_price != 0" class="item-note">{{show.cinema_info.approximate_price | number:1}}€</span>
+              <span ng-if="show.cinema_info.approximate_price == 0" class="item-note">Entrada gratuita</span>
             </div>
         </div>
         <div class="list card">

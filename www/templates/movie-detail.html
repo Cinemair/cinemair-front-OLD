@@ -48,7 +48,11 @@
                 <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/dates/{{show.id}}">
                     <h2>{{show.cinema_info.name}}</h2>
                     <p>{{show.cinema_info.address}}</p>
-                    <p>{{show.datetime|momentFormat: 'LL, H:mm'}}h</p>
+                    <p>
+                      {{show.datetime|momentFormat: 'LL, H:mm'}}h
+                      <small ng-if="show.cinema_info.approximate_price != 0">({{show.cinema_info.approximate_price | number:1}}€)</small>
+                      <small ng-if="show.cinema_info.approximate_price == 0">(Entrada gratuita)</small>
+                    </p>
                     <i class="icon ion-android-favorite"
                        ng-class="{assertive: show.event, stable: !show.event}"
                        ng-click="$event.preventDefault(); toggleShow(show);"></i>
