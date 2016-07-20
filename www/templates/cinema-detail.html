@@ -8,25 +8,23 @@
             <div class="item item-image" >
               <iframe width="100%" height="180" frameborder="0" style="border:0" src="{{mapAddress | trusted}}"></iframe>
             </div>
-            <div class="item item-body">
-              <div class="list">
-                <a class="item item-icon-left" href="{{mapAddress}}">
-                  <i class="icon ion-location stable"></i>
-                  Localización
-                  <span class="item-note">
-                  {{cinema.address}}
-                  </span>
-                </a>
-                <div class="item item-icon-left">
-                  <i class="icon ion-social-euro stable"></i>
-                  Precio aproximado
-                  <span class="item-note" ng-if="cinema.approximate_price != 0">
-                  {{cinema.approximate_price}}
-                  </span>
-                  <span class="item-note" ng-if="cinema.approximate_price == 0">
-                  Entrada gratuita
-                  </span>
-                </div>
+            <div class="list">
+              <a class="item item-icon-left" href="{{mapAddress}}">
+                <i class="icon ion-location stable"></i>
+                Localización
+                <span class="item-note">
+                {{cinema.address}}
+                </span>
+              </a>
+              <div class="item item-icon-left">
+                <i class="icon ion-social-euro stable"></i>
+                Precio aproximado
+                <span class="item-note" ng-if="cinema.approximate_price != 0">
+                {{cinema.approximate_price}}
+                </span>
+                <span class="item-note" ng-if="cinema.approximate_price == 0">
+                Entrada gratuita
+                </span>
               </div>
             </div>
             <div class="list">

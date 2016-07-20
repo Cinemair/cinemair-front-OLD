@@ -1,63 +1,62 @@
 <ion-view view-title="{{movie.tmdb_info.title}}">
-    <ion-content class="padding">
-        <div class="list card">
-            <div class="item item-image" >
-                <img ng-src="{{ 'https://image.tmdb.org/t/p/w185' + movie.tmdb_info.backdrop_path}}" >
-            </div>
-            <div class="item item-divider item-icon-left item-icon-right">
-                <i class="icon ion-quote stable"></i>
-                <h2>{{movie.tmdb_info.title}}</h2>
-                <p>{{movie.tmdb_info.tagline}}</p>
-            </div>
-            <div class="item item-body">
-                <div class="vote-avg">
-                    <span ng-repeat="n in [] | range:movie.tmdb_info.vote_average" class="vote-avg">
-                        <i class="icon ion-android-star energized"></i>
-                    </span>
-                    <span ng-repeat="n in [] | rangeInvert:movie.tmdb_info.vote_average">
-                        <i class="icon ion-android-star-outline energized"></i>
-                    </span>
-                </div>
-                <p>
-                    {{movie.tmdb_info.overview}}
-                </p>
-                <a ng-if="movie.tmdb_videos[0].key" class="button button-block button-light" ng-href="https://www.youtube.com/watch?v={{movie.tmdb_videos[0].key}}&autoplay=1">
-                    <i class="icon ion-closed-captioning"></i>
-                    <span>Ver trailer</span>
-                </a>
-                <p>
-                    <span class="subdued">
-                        <span class="icon ion-android-calendar"></span>
-                        Estreno: {{movie.tmdb_info.release_date|momentFormat: 'gggg'}}
-                    </span>
-                    <span class="subdued" ng-repeat="country in movie.tmdb_info.production_countries">
-                        <span class="icon ion-location"></span>
-                        País:{{country.name}}
-                    </span>
-                    <span class="subdued" ng-repeat="genre in movie.tmdb_info.genres">
-                        <span class="icon ion-happy-outline">
-                        </span>{{genre.name}}
-                    </span>
-                </p>
-            </div>
-            <div class="list">
-                <div class="item item-divider item-icon-left">
-                    <h2>Pases</h2>
-                    <i class="icon ion-android-calendar stable"></i>
-                </div>
-                <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/shows/{{show.id}}">
-                    <h2>{{show.cinema_info.name}}</h2>
-                    <p>{{show.cinema_info.address}}</p>
-                    <p>
-                      {{show.datetime|momentFormat: 'LL, H:mm'}}h
-                      <small ng-if="show.cinema_info.approximate_price != 0">({{show.cinema_info.approximate_price | number:1}}€)</small>
-                      <small ng-if="show.cinema_info.approximate_price == 0">(Entrada gratuita)</small>
-                    </p>
-                    <i class="icon ion-android-favorite"
-                       ng-class="{assertive: show.favorite, stable: !show.favorite}"
-                       ng-click="$event.preventDefault(); toggleFavorite(show);"></i>
-                </a>
-            </div>
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-image">
+        <img ng-src="{{ 'https://image.tmdb.org/t/p/w185' + movie.tmdb_info.backdrop_path}}">
+      </div>
+      <div class="item item-divider item-icon-left item-icon-right">
+        <i class="icon ion-quote stable"></i>
+        <h2>{{movie.tmdb_info.title}}</h2>
+        <p>{{movie.tmdb_info.tagline}}</p>
+      </div>
+      <div class="item item-body">
+        <h2 class="dark" ng-if="movie.tmdb_info.title != movie.tmdb_info.original_title">{{movie.tmdb_info.original_title}}</h2>
+        <div class="vote-avg">
+          <span ng-repeat="n in [] | range:movie.tmdb_info.vote_average" class="vote-avg">
+            <i class="icon ion-android-star energized"></i>
+          </span>
+          <span ng-repeat="n in [] | rangeInvert:movie.tmdb_info.vote_average">
+            <i class="icon ion-android-star-outline energized"></i>
+          </span>
         </div>
-    </ion-content>
+        <p>
+          {{movie.tmdb_info.overview}}
+        </p>
+        <a ng-if="movie.tmdb_videos[0].key" class="button button-block button-light" ng-href="https://www.youtube.com/watch?v={{movie.tmdb_videos[0].key}}&autoplay=1">
+          <i class="icon ion-closed-captioning"></i>
+          <span>Ver trailer</span>
+        </a>
+        <p>
+          <span class="subdued">
+            <span class="icon ion-android-calendar"></span>
+            Estreno:
+            {{movie.tmdb_info.release_date|momentFormat: 'gggg'}}
+          </span>
+          <span class="subdued" ng-repeat="country in movie.tmdb_info.production_countries">
+            <span class="icon ion-location"></span>
+            País:{{country.name}}
+          </span>
+          <span class="subdued" ng-repeat="genre in movie.tmdb_info.genres">
+            <span class="icon ion-happy-outline"></span>{{genre.name}}
+          </span>
+        </p>
+      </div>
+      <div class="list">
+        <div class="item item-divider item-icon-left">
+          <h2>Pases</h2>
+          <i class="icon ion-android-calendar stable"></i>
+        </div>
+        <a class="item item-icon-right" ng-repeat="show in shows" ng-href="tab/shows/{{show.id}}">
+          <h2>{{show.cinema_info.name}}</h2>
+          <p>{{show.cinema_info.address}}</p>
+          <p>
+            {{show.datetime|momentFormat: 'LL, H:mm'}}h
+            <small ng-if="show.cinema_info.approximate_price != 0">({{show.cinema_info.approximate_price | number:1}}€)</small>
+            <small ng-if="show.cinema_info.approximate_price == 0">(Entrada gratuita)</small>
+          </p>
+          <i class="icon ion-android-favorite" ng-class="{assertive: show.favorite, stable: !show.favorite}" ng-click="$event.preventDefault(); toggleFavorite(show);"></i>
+        </a>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>
