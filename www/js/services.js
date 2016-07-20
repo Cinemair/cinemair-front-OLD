@@ -4,7 +4,7 @@ var googleClientId = "661976506904-t5hdjfsvggji8vt9k2jqfk1bs2st3c23.apps.googleu
 angular.module('cinemair.services', [])
 
 
-.factory('CinemairSrv', ["$http", "$location", "UserSrv", "$rootScope", function($http, $location, UserSrv, $rootScope) {
+.factory('CinemairSrv', ["$http", "$location", "UserSrv", function($http, $location, UserSrv) {
 
     _headers = function() {
         headers = {};
@@ -95,7 +95,7 @@ angular.module('cinemair.services', [])
             url: serverURL + '/favorites',
             data: {
                 show: showId,
-                user: $rootScope.user.id
+                user: UserSrv.getUser().id
             }
         });
     };
@@ -183,6 +183,15 @@ angular.module('cinemair.services', [])
             $window.location.href = url;
         },
         loginOrRegisterWithGoogleAccount: function (code) {
+            var onSuccess = function(response) {
+                setUser(response.data);
+                return response;
+            };
+            var onError = function(response){
+                logout();
+                return response;
+            };
+
             return $http({
                 method: 'POST',
                 url: serverURL + '/auth',
@@ -190,10 +199,7 @@ angular.module('cinemair.services', [])
                     code: code,
                     type: "google"
                 }
-            }).success(function(response) {
-                setUser(response);
-                return response;
-            });
+            }).then(onSuccess, onError);
         }
     };
 
